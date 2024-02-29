@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Plus, ListFilter } from 'lucide-vue-next'
+import { Plus } from 'lucide-vue-next'
 </script>
 
 <template>
@@ -19,10 +19,7 @@ import { Plus, ListFilter } from 'lucide-vue-next'
 
     <article
       class="flex size-full flex-col items-center justify-between gap-4 rounded-3xl bg-california-500/20 px-4 py-6 shadow-lg lg:w-10/12">
-      <UButton class="flex items-center justify-center gap-2 self-end px-4 py-2 transition-all">
-        <ListFilter class="size-4" /> Filtrar
-      </UButton>
-
+      <FilterDropdown class="self-end" />
       <section
         class="flex size-full flex-wrap items-start justify-start gap-4 overflow-y-auto rounded-lg bg-white p-2 scrollbar-hide">
         <TheCardPet v-for="n in 22" :key="n" />
