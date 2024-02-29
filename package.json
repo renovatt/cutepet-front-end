@@ -13,9 +13,11 @@
   },
   "dependencies": {
     "@nuxt/ui": "^2.14.1",
+    "date-fns": "^3.3.1",
     "lucide-vue-next": "^0.343.0",
     "nuxt": "^3.10.3",
     "tailwind-scrollbar-hide": "^1.1.7",
+    "v-calendar": "^3.1.2",
     "vue": "^3.4.19",
     "vue-router": "^4.3.0"
   },
