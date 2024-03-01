@@ -20,7 +20,9 @@ watch(() => date.value, (newDate) => {
 </script>
 
 <template>
-  <VCalendarDatePicker v-model="date" v-bind="{ ...attrs, ...$attrs }" />
+  <div class="flex w-full items-center justify-center rounded-lg">
+    <VCalendarDatePicker v-model="date" v-bind="{ ...attrs, ...$attrs }" />
+  </div>
 </template>
 
 <style>

@@ -4,13 +4,13 @@ import { Dumbbell, Cat, Heart, PawPrint, CalendarDays, Info } from 'lucide-vue-n
 </script>
 
 <template>
-  <div class="relative flex w-full max-w-80 items-center justify-between rounded-lg bg-california-300/10 p-2 shadow-lg">
+  <div class="relative flex w-80 items-center justify-between rounded-lg bg-california-300/10 p-2 shadow">
     <Info class=" absolute right-2 top-2 size-5 cursor-pointer text-california-500" />
     <article class="flex w-full items-center justify-center gap-5">
       <img src="https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg"
         class="size-40 rounded-lg bg-california-500 object-cover shadow-lg">
 
-      <section class="flex w-full flex-col items-center justify-between gap-4">
+      <section class="flex size-40 flex-col items-center justify-between gap-4">
         <section class="flex w-full flex-col items-start justify-between gap-2">
           <span class="flex items-center justify-center gap-2 text-gray-400">
             <Cat class="size-5 text-california-500" />

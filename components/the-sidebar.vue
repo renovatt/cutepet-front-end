@@ -11,12 +11,12 @@ const links = [
     icon: LayoutGrid
   },
   {
-    name: 'Schedule',
+    name: 'Agendamentos',
     to: '/schedule',
     icon: CalendarDays
   },
   {
-    name: 'Somethig',
+    name: 'Sem nome',
     to: '/',
     icon: Building2
   }
@@ -26,7 +26,7 @@ const links = [
 
 <template>
   <aside :class="isOpen ? 'md:w-72' : 'md:w-20'"
-    class="fixed bottom-0 flex w-full flex-col items-center justify-start gap-5 bg-california-950 p-2 shadow-md transition-all md:relative">
+    class="fixed bottom-0 z-50 flex w-full flex-col items-center justify-start gap-5 bg-california-950 p-2 shadow-md transition-all md:relative">
     <ChevronLeft v-if="isOpen"
       class="absolute -right-2 top-5 hidden size-4 cursor-pointer rounded-full border bg-california-50 text-california-500 shadow md:flex"
       @click="isOpen = !isOpen" />
@@ -56,13 +56,13 @@ const links = [
         :class="isActive === '/settings' ? 'bg-california-700/20 text-california-50' : 'text-gray-400'"
         class="flex w-full items-center justify-center gap-5 rounded-lg p-2 transition-all hover:bg-california-700/20">
         <Settings :class="isActive === '/settings' ? 'text-california-500' : 'text-gray-400'" /><span
-          :class="isOpen ? 'flex w-24' : 'hidden'">Settings</span>
+          :class="isOpen ? 'flex w-24' : 'hidden'">Configurações</span>
       </Nuxtlink>
 
       <UButton
         class="flex w-full cursor-pointer items-center justify-center gap-5 rounded-lg bg-transparent p-2 text-gray-400 transition-all hover:bg-california-700/20 dark:bg-transparent dark:text-gray-400 dark:hover:bg-california-700/20">
         <LogOut class="text-gray-400" />
-        <span :class="isOpen ? 'flex w-24' : 'hidden'">Logout</span>
+        <span :class="isOpen ? 'flex w-24' : 'hidden'">Sair</span>
       </UButton>
 
       <TheThemeMode />
