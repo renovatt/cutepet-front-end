@@ -1,35 +1,51 @@
 <script setup lang="ts">
-import { Clock } from 'lucide-vue-next'
+import { Clock, ShowerHead, Stethoscope, CalendarDays } from 'lucide-vue-next'
+
+const cardData = [
+  {
+    title: 'Hoje',
+    value: '3',
+    subtitle: 'Agendamentos',
+    icon: Clock
+  },
+  {
+    title: 'Visão Geral',
+    value: '26',
+    subtitle: 'Agendamentos',
+    icon: CalendarDays
+  },
+  {
+    title: 'Banho e Tosa',
+    value: '22',
+    subtitle: 'Agendamentos',
+    icon: ShowerHead
+  },
+  {
+    title: 'Clínica',
+    value: '4',
+    subtitle: 'Agendamentos',
+    icon: Stethoscope
+  }
+]
+
 </script>
 
 <template>
   <section
-    class="flex min-h-screen w-full flex-col items-center justify-center gap-4 overflow-y-auto bg-white p-2 scrollbar-hide lg:flex-row lg:justify-center">
-    <article
-      class="flex h-full flex-col items-center justify-between overflow-y-auto rounded-3xl py-10 scrollbar-hide lg:w-3/12">
-      <section class="flex flex-wrap items-center justify-evenly gap-2">
-        <article v-for="n in 4" :key="n"
-          class="bg-gradient flex h-52 w-40 flex-col items-center justify-around rounded-3xl p-2 shadow">
-          <h2 class="text-xs font-semibold text-california-50">
-            Agendamentos
-          </h2>
-
-          <div class="flex w-full flex-col items-start justify-center">
-            <span class="flex items-center justify-center gap-1 text-2xl font-semibold text-california-50">
-              <span>12</span>
-              <Clock class="size-6" />
-            </span>
-            <h5 class="text-semibold text-xs text-california-50">
-              Agendamentos
-            </h5>
-          </div>
-        </article>
+    class="flex min-h-screen w-full flex-col items-center justify-start gap-4 space-y-4 overflow-y-auto bg-gray-200/10 p-4 scrollbar-hide lg:flex-row lg:justify-center lg:space-y-0">
+    <article class="flex flex-col items-center justify-start rounded-lg p-2 lg:h-full lg:max-w-96">
+      <section class="flex flex-wrap items-center justify-evenly gap-8">
+        <the-dash-card v-for="card in cardData" :key="card.title" :title="card.title" :subtitle="card.subtitle"
+          :value="card.value">
+          <template #icon>
+            <component :is="card.icon" class="size-5 text-california-50 md:size-10" />
+          </template>
+        </the-dash-card>
       </section>
     </article>
 
-    <article class="flex size-full flex-col items-center justify-center lg:w-10/12">
-      <section
-        class="flex size-full flex-wrap items-start justify-evenly gap-x-2 gap-y-4 overflow-y-auto rounded-lg p-2 scrollbar-hide">
+    <article class="flex size-full flex-col items-center justify-center">
+      <section class="size-full overflow-y-auto rounded-lg bg-white px-4 shadow-lg scrollbar-hide">
         <FullCalendar />
       </section>
     </article>
