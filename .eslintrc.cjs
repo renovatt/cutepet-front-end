@@ -8,11 +8,13 @@ module.exports = {
   plugins: ['tailwindcss'],
   rules: {
     'no-console': 'off',
+    'no-tabs': 'off',
     'vue/html-indent': 'off',
     'vue/first-attribute-linebreak': 'off',
     'vue/html-closing-bracket-newline': 'off',
     'vue/max-attributes-per-line': 'off',
     'space-before-function-paren': ['error', 'never'],
-    'tailwindcss/no-custom-classname': 'off'
+    'tailwindcss/no-custom-classname': 'off',
+    'vue/multiline-html-element-content-newline': 'off'
   }
 }
