@@ -32,8 +32,8 @@ const cardData = [
 
 <template>
   <section
-    class="flex min-h-screen w-full flex-col items-center justify-start gap-4 space-y-4 overflow-y-auto bg-[#f5f5f5] p-4 scrollbar-hide lg:flex-row lg:justify-center lg:space-y-0">
-    <article class="flex flex-col items-center justify-start rounded-lg lg:h-full lg:max-w-96">
+    class="flex min-h-screen w-full flex-col items-center justify-between gap-10 space-y-4 overflow-y-auto bg-[#f5f5f5] p-4 scrollbar-hide lg:flex-row lg:justify-center lg:space-y-0">
+    <article class="flex flex-col items-center justify-start gap-10 rounded-lg px-4 lg:h-full lg:max-w-96">
       <section class="flex flex-wrap items-center justify-evenly gap-8">
         <the-dash-card v-for="card in cardData" :key="card.title" :title="card.title" :subtitle="card.subtitle"
           :value="card.value">
@@ -42,9 +42,10 @@ const cardData = [
           </template>
         </the-dash-card>
       </section>
+      <the-schedule-btn />
     </article>
 
-    <article class="flex size-full flex-col items-center justify-center">
+    <article class="flex size-full max-w-7xl flex-col items-center justify-center p-1">
       <section class="size-full overflow-y-auto rounded-lg bg-white px-4 shadow-lg scrollbar-hide">
         <FullCalendar />
       </section>

@@ -46,7 +46,7 @@ const links = [
           class="flex w-full items-center justify-center gap-5 rounded-lg p-2 transition-all hover:bg-california-700/20">
           <component :is="link.icon" :class="isActive === link.to ? 'text-california-500' : 'text-gray-400'" /><span
             :class="isOpen ? 'md:flex w-24 hidden' : 'hidden'">{{
-              link.name }}</span>
+    link.name }}</span>
         </NuxtLink>
       </ul>
     </nav>
@@ -59,13 +59,10 @@ const links = [
           :class="isOpen ? 'flex w-24' : 'hidden'">Configurações</span>
       </Nuxtlink>
 
-      <UButton
-        class="flex w-full cursor-pointer items-center justify-center gap-5 rounded-lg bg-transparent p-2 text-gray-400 transition-all hover:bg-california-700/20 dark:bg-transparent dark:text-gray-400 dark:hover:bg-california-700/20">
-        <LogOut class="text-gray-400" />
-        <span :class="isOpen ? 'flex w-24' : 'hidden'">Sair</span>
+      <UButton class="flex w-full cursor-pointer items-center justify-center gap-5 rounded-lg bg-transparent p-2">
+        <LogOut class="text-gray-400 hover:text-california-500" />
+        <span :class="isOpen ? 'flex w-24 text-gray-400 hover:text-california-500' : 'hidden'">Sair</span>
       </UButton>
-
-      <TheThemeMode />
     </section>
   </aside>
 </template>

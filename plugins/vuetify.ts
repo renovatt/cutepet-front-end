@@ -31,7 +31,7 @@ export default defineNuxtPlugin((app) => {
         light: {
           dark: false,
           colors: {
-            primary: colors.pizazz[500],
+            primary: colors.pizazz[600],
             secondary: colors.pizazz[400]
           }
         }

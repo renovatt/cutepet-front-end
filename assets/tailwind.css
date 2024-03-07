@@ -13,3 +13,9 @@ body {
     @apply overflow-hidden scrollbar-hide;
   }
 }
+
+@layer utilities {
+  .bg-gradient {
+    background: linear-gradient(180deg, rgba(255,158,11,1) 0%, rgba(187,77,2,1) 100%);
+  }
+}

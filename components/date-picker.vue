@@ -7,9 +7,9 @@ watch(date, (newVal) => {
 </script>
 
 <template>
-  <div class="px-4">
+  <div class="shadow-lg">
     <v-locale-provider locale="pt">
-      <v-date-picker v-model="date" color="primary" title="Escolha uma data" header="Filtrar" location="pt" />
+      <v-date-picker v-model="date" color="primary" title="Escolha uma data" header="Filtrar" />
     </v-locale-provider>
   </div>
 </template>
