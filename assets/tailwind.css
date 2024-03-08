@@ -19,3 +19,7 @@ body {
     background: linear-gradient(180deg, rgba(255,158,11,1) 0%, rgba(187,77,2,1) 100%);
   }
 }
+
+input[type="radio"]:checked {
+  background-color: #ff9e0b !important;
+}

@@ -47,8 +47,8 @@ const cardData = [
 
     <article class="flex size-full max-w-7xl items-center justify-center p-1">
       <section class="flex size-full flex-wrap items-start justify-start gap-4 overflow-y-auto pl-2 scrollbar-hide">
-        <the-card-pet v-for="n in 18" :key="n" name="Jujuba" time="10:00h" type="cat" />
-        <the-card-pet v-for="n in 28" :key="n" name="Jubileu" time="13:00h" type="dog" />
+        <the-schedule-card-pet v-for="n in 18" :key="n" name="Jujuba" time="10:00h" type="cat" />
+        <the-schedule-card-pet v-for="n in 28" :key="n" name="Jubileu" time="13:00h" type="dog" />
       </section>
     </article>
   </section>
