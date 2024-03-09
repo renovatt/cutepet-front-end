@@ -19,7 +19,9 @@ const attrs = {
 </script>
 
 <template>
-  <VCalendarDatePicker v-model="date" mode="date" v-bind="{ ...attrs, ...$attrs }" />
+  <div class="grid w-full place-items-center">
+    <VCalendarDatePicker v-model="date" mode="date" v-bind="{ ...attrs, ...$attrs }" />
+  </div>
 </template>
 
 <style>

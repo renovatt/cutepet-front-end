@@ -10,7 +10,7 @@ const props = defineProps<CardProps>()
 
 <template>
   <article
-    class="bg-gradient size-38 flex flex-col items-center justify-around gap-2 rounded-3xl p-4 shadow-xl md:size-40">
+    class="bg-gradient size-38 flex flex-col items-center justify-around gap-2 rounded-3xl p-4 shadow-md md:size-40">
     <div class="flex w-full items-start justify-between">
       <h1 class="w-14 truncate font-semibold text-california-50 md:overflow-visible md:whitespace-normal">
         {{ props.title }}

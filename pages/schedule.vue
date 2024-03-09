@@ -21,7 +21,7 @@ const { isOpen } = useToggle()
 
 <template>
   <section
-    class="flex min-h-screen w-full flex-col items-center justify-between gap-10 overflow-y-auto bg-[#f5f5f5] p-4 scrollbar-hide lg:flex-row lg:justify-center lg:pb-5">
+    class="flex size-full min-h-screen flex-col items-start justify-start gap-10 overflow-y-auto bg-[#f5f5f5] p-4 scrollbar-hide md:justify-center lg:flex-row">
     <UModal v-model="isOpen">
       <UCard :ui="{ divide: 'divide-y divide-gray-100' }" class="bg-[#f5f5f5]">
         <template #header>
@@ -43,12 +43,12 @@ const { isOpen } = useToggle()
     </UModal>
 
     <article
-      class="flex size-full min-h-screen flex-col items-center justify-between space-y-8 overflow-y-auto scrollbar-hide md:min-h-max lg:max-w-96 lg:px-4">
+      class="flex min-h-[90%] w-full flex-col items-center justify-center space-y-10 md:min-h-max md:justify-between lg:max-w-96">
 
       <the-date-picker-calendar />
-      <the-schedule-btn @click="isOpen = !isOpen" />
+      <the-schedule-btn class="lg:w-full" @click="isOpen = !isOpen" />
 
-      <section class="flex w-full flex-wrap items-center justify-evenly gap-8">
+      <section class="flex flex-wrap items-center justify-between gap-8 py-2 lg:w-full">
         <the-dash-card v-for="card in cardData" :key="card.title" :title="card.title" :subtitle="card.subtitle"
           :value="card.value">
 
@@ -59,8 +59,9 @@ const { isOpen } = useToggle()
       </section>
     </article>
 
-    <article class="flex size-full max-w-7xl items-center justify-center p-1">
-      <section class="flex size-full flex-wrap items-start justify-start gap-4 overflow-y-auto pl-2 scrollbar-hide">
+    <article class="flex size-full max-w-7xl items-center justify-center">
+      <section
+        class="flex size-full flex-wrap items-start justify-center gap-4 overflow-y-auto pb-14 scrollbar-hide md:justify-start md:pb-4">
         <the-schedule-card-pet v-for="n in 18" :key="n" name="Jujuba" time="10:00h" type="cat" />
         <the-schedule-card-pet v-for="n in 28" :key="n" name="Jubileu" time="13:00h" type="dog" />
       </section>
