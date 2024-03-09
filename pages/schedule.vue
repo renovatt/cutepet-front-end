@@ -45,21 +45,13 @@ const { isOpen } = useToggle()
     <article
       class="flex size-full min-h-screen flex-col items-center justify-between space-y-8 overflow-y-auto scrollbar-hide md:min-h-max lg:max-w-96 lg:px-4">
 
-      <v-container>
-        <v-row justify="space-around">
-          <DatePicker />
-        </v-row>
-      </v-container>
-
-      <v-container>
-        <v-row justify="center">
-          <the-schedule-btn @click="isOpen = !isOpen" />
-        </v-row>
-      </v-container>
+      <the-date-picker-calendar />
+      <the-schedule-btn @click="isOpen = !isOpen" />
 
       <section class="flex w-full flex-wrap items-center justify-evenly gap-8">
         <the-dash-card v-for="card in cardData" :key="card.title" :title="card.title" :subtitle="card.subtitle"
           :value="card.value">
+
           <template #icon>
             <component :is="card.icon" class="size-5 text-california-50 md:size-10" />
           </template>

@@ -57,6 +57,7 @@ const { isOpen } = useToggle()
       <section class="flex flex-wrap items-center justify-evenly gap-8">
         <the-dash-card v-for="card in cardData" :key="card.title" :title="card.title" :subtitle="card.subtitle"
           :value="card.value">
+
           <template #icon>
             <component :is="card.icon" class="size-5 text-california-50 md:size-10" />
           </template>
@@ -67,7 +68,7 @@ const { isOpen } = useToggle()
 
     <article class="flex size-full max-w-7xl flex-col items-center justify-center p-1">
       <section class="size-full overflow-y-auto rounded-lg bg-white px-4 shadow-lg scrollbar-hide">
-        <FullCalendar />
+        <the-custom-calendar />
       </section>
     </article>
   </section>

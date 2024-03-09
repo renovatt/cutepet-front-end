@@ -1,8 +1,10 @@
 module.exports = {
   root: true,
   extends: [
+    'prettier',
     'eslint:recommended',
     'plugin:tailwindcss/recommended',
+    'plugin:vue/vue3-recommended',
     '@nuxtjs/eslint-config-typescript'
   ],
   plugins: ['tailwindcss'],
