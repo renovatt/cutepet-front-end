@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ShowerHead, Stethoscope } from 'lucide-vue-next'
+import { Plus, ShowerHead, Stethoscope } from 'lucide-vue-next'
 
 const cardData = [
   {
@@ -38,13 +38,15 @@ const { isOpen } = useToggle()
     <article
       class="flex min-h-[90%] w-full flex-col items-center justify-center space-y-10 md:min-h-max md:justify-between lg:max-w-96">
       <the-date-picker-calendar />
-      <the-schedule-btn class="lg:w-full" @click="isOpen = !isOpen" />
+      <Button @click="isOpen = !isOpen">
+        <Plus class="size-6" /> Novo Agendamento
+      </Button>
       <section class="flex flex-wrap items-center justify-between gap-8 py-2 lg:w-full">
         <the-dash-card v-for="card in cardData" :key="card.title" :title="card.title" :subtitle="card.subtitle"
           :value="card.value">
 
           <template #icon>
-            <component :is="card.icon" class="size-5 text-california-50 md:size-10" />
+            <component :is="card.icon" class="text-california-50 size-5 md:size-10" />
           </template>
         </the-dash-card>
       </section>

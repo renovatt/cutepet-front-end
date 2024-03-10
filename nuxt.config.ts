@@ -2,21 +2,30 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
-    '@nuxt/ui',
+    '@nuxtjs/tailwindcss',
+    'shadcn-nuxt',
     '@pinia/nuxt',
     'nuxt-headlessui'
   ],
   tailwindcss: {
     exposeConfig: true,
-    cssPath: '~/assets/tailwind.css'
+    cssPath: '~/assets/css/tailwind.css'
   },
-  colorMode: {
-    preference: 'light'
+  build: {
+    // Remove the colorMode property
   },
   pinia: {
     storesDirs: ['./stores/**', './custom-folder/stores/**']
   },
   headlessui: {
     prefix: 'H'
+  },
+  shadcn: {
+    prefix: '',
+    /**
+     * Directory that the component lives in.
+     * @default "./components/ui"
+     */
+    componentDir: './components/ui'
   }
 })

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Clock, ShowerHead, Stethoscope, CalendarDays } from 'lucide-vue-next'
+import { Clock, ShowerHead, Stethoscope, CalendarDays, Plus } from 'lucide-vue-next'
 
 const cardData = [
   {
@@ -52,11 +52,13 @@ const { isOpen } = useToggle()
           :value="card.value">
 
           <template #icon>
-            <component :is="card.icon" class="size-5 text-california-50 md:size-10" />
+            <component :is="card.icon" class="text-california-50 size-5 md:size-10" />
           </template>
         </the-dash-card>
       </section>
-      <the-schedule-btn @click="isOpen = !isOpen" />
+      <Button @click="isOpen = !isOpen">
+        <Plus class="size-6" /> Novo Agendamento
+      </Button>
     </article>
 
     <article class="flex size-full max-w-7xl flex-col items-center justify-center p-1">
