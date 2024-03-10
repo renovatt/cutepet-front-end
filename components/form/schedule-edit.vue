@@ -45,17 +45,36 @@ import { cn } from '~/lib/utils'
 import { age, breeds, sex, times, weight } from '~/utils/mocks'
 import { scheduleFormSchema } from '~/schemas/schedule-form'
 
+const dateByApi = ref(new Date('2024-03-30T15:35:39.078Z'))
+
+const petData = {
+  petname: 'Jujuba',
+  age: '1a-2a',
+  weight: '20kg-40kg',
+  sex: 'macho',
+  time: '10:00',
+  breed: {
+    id: 'Atinux',
+    label: 'Atinux',
+    avatar: {
+      src: 'https://avatars.githubusercontent.com/u/904724?v=4'
+    }
+  },
+  obs: 'Cuidado, ele morde quando esta com fome!',
+  date: dateByApi.value,
+}
+
 const { handleSubmit, setValues, values } = useForm({
   validationSchema: scheduleFormSchema,
   initialValues: {
-    petname: '',
-    obs: '',
-    weight: weight[0].value,
-    age: age[0].value,
-    sex: sex[0].value,
-    time: '',
-    breed: breeds[0]
-    // date: new Date()
+    petname: petData.petname,
+    obs: petData.obs,
+    weight: petData.weight,
+    age: petData.age,
+    sex: petData.sex,
+    time: petData.time,
+    breed: breeds[0],
+    date: petData.date
   }
 })
 
