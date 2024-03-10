@@ -33,7 +33,7 @@ const { isOpen } = useToggle()
 
 <template>
   <section
-    class="flex min-h-screen w-full flex-col items-center justify-between gap-10 space-y-4 overflow-y-auto bg-[#f5f5f5] p-4 scrollbar-hide lg:flex-row lg:justify-center lg:space-y-0">
+    class="flex min-h-screen w-full flex-col items-center justify-between gap-10 space-y-4 overflow-y-auto p-4 scrollbar-hide lg:flex-row lg:justify-center lg:space-y-0">
     <the-modal :is-open="isOpen" @close="isOpen = !isOpen">
       <template #title>
         Agendamento
@@ -52,7 +52,7 @@ const { isOpen } = useToggle()
           :value="card.value">
 
           <template #icon>
-            <component :is="card.icon" class="text-california-50 size-5 md:size-10" />
+            <component :is="card.icon" class="size-5 text-secondary md:size-10" />
           </template>
         </the-dash-card>
       </section>
@@ -62,7 +62,7 @@ const { isOpen } = useToggle()
     </article>
 
     <article class="flex size-full max-w-7xl flex-col items-center justify-center p-1">
-      <section class="size-full overflow-y-auto rounded-lg bg-white px-4 shadow-lg scrollbar-hide">
+      <section class="size-full overflow-y-auto rounded-lg border px-4 shadow scrollbar-hide">
         <the-custom-calendar />
       </section>
     </article>

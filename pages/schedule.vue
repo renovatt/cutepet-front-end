@@ -21,7 +21,7 @@ const { isOpen } = useToggle()
 
 <template>
   <section
-    class="flex size-full min-h-screen flex-col items-start justify-start gap-10 overflow-y-auto bg-[#f5f5f5] p-4 scrollbar-hide md:justify-center lg:flex-row">
+    class="flex size-full min-h-screen flex-col items-start justify-start gap-10 overflow-y-auto p-4 scrollbar-hide md:justify-center lg:flex-row">
     <the-modal :is-open="isOpen" @close="isOpen = !isOpen">
       <template #title>
         Agendar
@@ -46,7 +46,7 @@ const { isOpen } = useToggle()
           :value="card.value">
 
           <template #icon>
-            <component :is="card.icon" class="text-california-50 size-5 md:size-10" />
+            <component :is="card.icon" class="size-5 text-primary-foreground md:size-10" />
           </template>
         </the-dash-card>
       </section>

@@ -88,7 +88,8 @@ body {
 
 @layer utilities {
   .bg-gradient {
-    background: linear-gradient(180deg, rgba(255,158,11,1) 0%, rgba(187,77,2,1) 100%);
+    /* background: linear-gradient(180deg, rgba(255,158,11,1) 0%, rgba(187,77,2,1) 100%); */
+    background: linear-gradient(to top left,#e65c00,#F9D423)
   }
 }
 

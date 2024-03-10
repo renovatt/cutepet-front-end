@@ -21,7 +21,7 @@ const emit = defineEmits(['close'])
             leave-to="opacity-0 scale-95">
             <HDialogPanel
               class="relative w-full max-w-4xl overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-              <X class="absolute right-4 top-4 cursor-pointer rounded bg-california-500 text-california-50 transition-all hover:bg-california-600"
+              <X class="absolute right-4 top-4 cursor-pointer rounded bg-primary text-secondary transition-all hover:bg-primary/70"
                 @click="emit('close')" />
               <HDialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">
 
