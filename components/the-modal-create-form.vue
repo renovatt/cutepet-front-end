@@ -111,7 +111,8 @@ watch(state, (newState) => {
 </script>
 
 <template>
-  <UForm ref="form" :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
+  <UForm ref="form" :schema="schema" :state="state"
+    class="w-[30rem] space-y-4 rounded-lg border border-california-500 bg-white p-2 px-4" @submit="onSubmit">
     <div class="flex h-24 gap-4">
       <UFormGroup name="name" label="Nome">
         <template #label>
@@ -121,10 +122,12 @@ watch(state, (newState) => {
       </UFormGroup>
 
       <UFormGroup name="breed" label="Raça">
+
         <template #label>
           <span class="font-bold text-california-500">Raça</span>
         </template>
         <USelectMenu v-model="state.breed" clear-search-on-close searchable :options="breeds">
+
           <template #leading>
             <UAvatar v-if="state.breed.avatar" v-bind="(state.breed.avatar as Avatar)" size="3xs" class="mx-0.5" />
           </template>
@@ -134,10 +137,12 @@ watch(state, (newState) => {
 
     <div class="flex w-full items-start justify-between gap-4">
       <UFormGroup name="age" label="Idade">
+
         <template #label>
           <span class="font-bold text-california-500">Idade</span>
         </template>
         <URadio v-for="option in age" :key="option.value" v-model="state.age" v-bind="option">
+
           <template #label>
             <span class="cursor-pointer  font-bold text-california-950">{{ option.label }}</span>
           </template>
@@ -145,10 +150,12 @@ watch(state, (newState) => {
       </UFormGroup>
 
       <UFormGroup name="weight" label="Peso">
+
         <template #label>
           <span class="font-bold text-california-500">Peso</span>
         </template>
         <URadio v-for="option in weight" :key="option.value" v-model="state.weight" v-bind="option">
+
           <template #label>
             <span class="cursor-pointer font-bold text-california-950">{{ option.label }}</span>
           </template>
@@ -156,10 +163,12 @@ watch(state, (newState) => {
       </UFormGroup>
 
       <UFormGroup name="sex" label="Sexo">
+
         <template #label>
           <span class="font-bold text-california-500">Sexo</span>
         </template>
         <URadio v-for="option in sex" :key="option.value" v-model="state.sex" v-bind="option">
+
           <template #label>
             <span class="cursor-pointer font-bold text-california-950">{{ option.label }}</span>
           </template>
@@ -169,6 +178,7 @@ watch(state, (newState) => {
 
     <div class="flex h-20 items-start justify-between">
       <UFormGroup name="date" label="Data">
+
         <template #label>
           <span class="font-bold text-california-500">Data</span>
         </template>
@@ -176,6 +186,7 @@ watch(state, (newState) => {
       </UFormGroup>
 
       <UFormGroup name="time" label="Hora">
+
         <template #label>
           <span class="font-bold text-california-500">Hora</span>
         </template>
@@ -184,6 +195,7 @@ watch(state, (newState) => {
     </div>
 
     <UFormGroup name="obs" label="Observação" class="h-28">
+
       <template #label>
         <span class="font-bold text-california-500">Observação</span>
       </template>
