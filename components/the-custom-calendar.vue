@@ -23,7 +23,7 @@ const attrs = {
 </template>
 
 <style>
-.vc-custom {
+/* .vc-custom {
   --vc-accent-50: #fffaec;
   --vc-accent-100: #fff5d3;
   --vc-accent-200: #ffe7a6;
@@ -34,5 +34,5 @@ const attrs = {
   --vc-accent-700: #cb6203;
   --vc-accent-800: #a14d0b;
   --vc-accent-900: #813f0d;
-}
+} */
 </style>

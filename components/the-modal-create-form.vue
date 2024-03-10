@@ -112,11 +112,11 @@ watch(state, (newState) => {
 
 <template>
   <UForm ref="form" :schema="schema" :state="state"
-    class="w-full space-y-4 rounded-lg border border-california-500 bg-white p-2 px-4 md:w-[30rem]" @submit="onSubmit">
+    class="w-full space-y-4 rounded-lg border border-primary bg-white p-2 px-4 md:w-[30rem]" @submit="onSubmit">
     <div class="flex flex-col gap-4 md:h-24 md:flex-row">
       <UFormGroup name="name" label="Nome">
         <template #label>
-          <span class="font-bold text-california-500">Nome</span>
+          <span class="font-bold text-primary">Nome</span>
         </template>
         <UInput v-model="state.name" placeholder="Informe o nome do pet" />
       </UFormGroup>
@@ -124,7 +124,7 @@ watch(state, (newState) => {
       <UFormGroup name="breed" label="Raça">
 
         <template #label>
-          <span class="font-bold text-california-500">Raça</span>
+          <span class="font-bold text-primary">Raça</span>
         </template>
         <USelectMenu v-model="state.breed" :options="breeds">
 
@@ -139,12 +139,12 @@ watch(state, (newState) => {
       <UFormGroup name="age" label="Idade">
 
         <template #label>
-          <span class="font-bold text-california-500">Idade</span>
+          <span class="font-bold text-primary">Idade</span>
         </template>
         <URadio v-for="option in age" :key="option.value" v-model="state.age" v-bind="option">
 
           <template #label>
-            <span class="cursor-pointer  font-bold text-california-950">{{ option.label }}</span>
+            <span class="cursor-pointer font-bold">{{ option.label }}</span>
           </template>
         </URadio>
       </UFormGroup>
@@ -152,12 +152,12 @@ watch(state, (newState) => {
       <UFormGroup name="weight" label="Peso">
 
         <template #label>
-          <span class="font-bold text-california-500">Peso</span>
+          <span class="font-bold text-primary">Peso</span>
         </template>
         <URadio v-for="option in weight" :key="option.value" v-model="state.weight" v-bind="option">
 
           <template #label>
-            <span class="cursor-pointer font-bold text-california-950">{{ option.label }}</span>
+            <span class="cursor-pointer font-bold">{{ option.label }}</span>
           </template>
         </URadio>
       </UFormGroup>
@@ -165,12 +165,12 @@ watch(state, (newState) => {
       <UFormGroup name="sex" label="Sexo">
 
         <template #label>
-          <span class="font-bold text-california-500">Sexo</span>
+          <span class="font-bold text-primary">Sexo</span>
         </template>
         <URadio v-for="option in sex" :key="option.value" v-model="state.sex" v-bind="option">
 
           <template #label>
-            <span class="cursor-pointer font-bold text-california-950">{{ option.label }}</span>
+            <span class="cursor-pointer font-bold">{{ option.label }}</span>
           </template>
         </URadio>
       </UFormGroup>
@@ -180,7 +180,7 @@ watch(state, (newState) => {
       <UFormGroup name="date" label="Data">
 
         <template #label>
-          <span class="font-bold text-california-500">Data</span>
+          <span class="font-bold text-primary">Data</span>
         </template>
         <the-select-created-date />
       </UFormGroup>
@@ -188,7 +188,7 @@ watch(state, (newState) => {
       <UFormGroup name="time" label="Hora">
 
         <template #label>
-          <span class="font-bold text-california-500">Hora</span>
+          <span class="font-bold text-primary">Hora</span>
         </template>
         <USelectMenu v-model="state.time" :options="times" placeholder="Escolha um horário" />
       </UFormGroup>
@@ -197,13 +197,13 @@ watch(state, (newState) => {
     <UFormGroup name="obs" label="Observação" class="h-28">
 
       <template #label>
-        <span class="font-bold text-california-500">Observação</span>
+        <span class="font-bold text-primary">Observação</span>
       </template>
       <UTextarea v-model="state.obs" placeholder="Cuidado, ele morde.." />
     </UFormGroup>
 
-    <UButton type="submit" block>
+    <Button type="submit" block>
       Salvar
-    </UButton>
+    </Button>
   </UForm>
 </template>Avatar,Avatar,Avatar,
