@@ -37,7 +37,7 @@ const { isOpen } = useToggle()
 
     <article
       class="flex min-h-[90%] w-full flex-col items-center justify-center space-y-10 md:min-h-max md:justify-between lg:max-w-96">
-      <the-date-picker-calendar />
+      <the-calendar />
       <Button @click="isOpen = !isOpen">
         <Plus class="size-6" /> Novo Agendamento
       </Button>
