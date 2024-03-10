@@ -4,13 +4,14 @@ import { Dumbbell, Cat, Heart, PawPrint, CalendarDays, Download, Clock } from 'l
 </script>
 
 <template>
-  <section class="relative flex w-96 items-center justify-center rounded-lg bg-california-50 p-2 shadow-md">
+  <section
+    class="relative flex w-full max-w-96 items-center justify-center rounded-lg bg-california-50 p-2 shadow md:w-96">
     <Download
-      class=" absolute right-2 top-2 size-5 cursor-pointer text-california-500 transition-all hover:text-california-600" />
-    <article class="flex w-full items-center justify-center gap-5 py-2">
-      <figure class="size-40">
+      class="absolute right-3 top-3 size-5 cursor-pointer text-california-500 transition-all hover:text-california-600" />
+    <article class="flex flex-col items-start justify-center gap-5 p-2 md:w-full md:flex-row">
+      <figure class="size-20 md:size-40">
         <img src="https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg"
-          class="size-40 rounded-lg border border-california-500 bg-california-500 object-cover shadow-lg">
+          class="size-20 rounded-lg border border-california-500 bg-california-500 object-cover shadow-lg md:size-40">
       </figure>
 
       <section class="flex w-40 flex-col items-center justify-between gap-4">

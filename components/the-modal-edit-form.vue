@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { z } from 'zod'
-import type { FormSubmitEvent } from '#ui/types'
+import type { Avatar, FormSubmitEvent } from '#ui/types'
 
 const breeds = [
+  {
+    id: 'viralata',
+    label: 'viralata',
+    avatar: {
+      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+    }
+  },
   {
     id: 'benjamincanac',
     label: 'benjamincanac',
@@ -38,10 +45,10 @@ const age = [
 ]
 
 const weight = [
-  { label: '0kg - 2kg', value: '0kg-2kg' },
-  { label: '2kg - 4kg', value: '2kg-4kg' },
-  { label: '4kg - 8kg', value: '4kg-8kg' },
-  { label: '8kg - 12kg', value: '8kg-12kg' }
+  { label: '0kg - 10kg', value: '0kg-10kg' },
+  { label: '20kg - 40kg', value: '20kg-40kg' },
+  { label: '40kg - 80kg', value: '40kg-80kg' },
+  { label: '80kg - 120kg', value: '80kg-120kg' }
 ]
 
 const sex = [
@@ -80,10 +87,10 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
 
 const state = reactive({
   name: 'Jujuba',
-  weight: '2kg-4kg',
+  weight: '20kg-40kg',
   age: '1a-2a',
   sex: 'macho',
-  time: times[1],
+  time: '10:00',
   obs: 'Ele morde quando tá com fome..',
   breed: breeds[0],
   date: dateByApi.value
@@ -94,16 +101,17 @@ watch(updatedDate, (newValue) => {
 })
 
 watch(state, (newState) => {
-  if (typeof newState.breeds === 'object' && newState.breeds !== null) {
-    state.breeds = newState.breeds.value
+  if (typeof newState.breed === 'object' && newState.breed !== null) {
+    state.breed = newState.breed
   }
 })
 
 </script>
 
 <template>
-  <UForm ref="form" :schema="schema" :state="state" class="space-y-8" @submit="onSubmit">
-    <div class="flex gap-4">
+  <UForm ref="form" :schema="schema" :state="state"
+    class="w-full space-y-4 rounded-lg border border-california-500 bg-white p-2 px-4 md:w-[30rem]" @submit="onSubmit">
+    <div class="flex flex-col gap-4 md:h-24 md:flex-row">
       <UFormGroup name="name" label="Nome">
         <template #label>
           <span class="font-bold text-california-500">Nome</span>
@@ -115,7 +123,7 @@ watch(state, (newState) => {
         <template #label>
           <span class="font-bold text-california-500">Raça</span>
         </template>
-        <USelectMenu v-model="state.breed" clear-search-on-close searchable :options="breeds">
+        <USelectMenu v-model="state.breed" :options="breeds">
           <template #leading>
             <UAvatar v-if="state.breed.avatar" v-bind="(state.breed.avatar as Avatar)" size="3xs" class="mx-0.5" />
           </template>
@@ -123,7 +131,7 @@ watch(state, (newState) => {
       </UFormGroup>
     </div>
 
-    <div class="flex w-full items-start justify-between gap-4">
+    <div class="flex w-full flex-wrap items-start justify-between gap-4">
       <UFormGroup name="age" label="Idade">
         <template #label>
           <span class="font-bold text-california-500">Idade</span>
