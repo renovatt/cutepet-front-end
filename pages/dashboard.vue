@@ -46,23 +46,23 @@ const { isOpen } = useToggle()
         </section>
       </template>
     </the-modal>
-    <article class="flex flex-col items-center justify-start gap-10 rounded-lg px-4 lg:h-full lg:max-w-96">
-      <section class="flex flex-wrap items-center justify-evenly gap-8">
+
+    <article class="flex flex-col items-center justify-start space-y-10 px-4 lg:h-full lg:max-w-96">
+       <section class="flex flex-wrap items-center justify-between gap-8 py-2 lg:w-full">
         <the-dash-card v-for="card in cardData" :key="card.title" :title="card.title" :subtitle="card.subtitle"
           :value="card.value">
-
           <template #icon>
             <component :is="card.icon" class="size-5 text-secondary md:size-10" />
           </template>
         </the-dash-card>
       </section>
-      <Button @click="isOpen = !isOpen">
+      <Button class="w-full" @click="isOpen = !isOpen">
         <Plus class="size-6" /> Novo Agendamento
       </Button>
     </article>
 
     <article class="flex size-full max-w-7xl flex-col items-center justify-center p-1">
-      <section class="size-full overflow-y-auto rounded-lg border px-4 shadow scrollbar-hide">
+      <section class="size-full overflow-y-auto rounded-lg pb-14 scrollbar-hide">
         <the-calendar />
       </section>
     </article>

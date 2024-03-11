@@ -21,7 +21,7 @@ const { isOpen } = useToggle()
 
 <template>
   <section
-    class="flex size-full min-h-screen flex-col items-start justify-start gap-10 overflow-y-auto p-4 scrollbar-hide md:justify-center lg:flex-row">
+    class="flex min-h-screen w-full flex-col items-start justify-start gap-10 overflow-y-auto p-4 scrollbar-hide lg:flex-row lg:justify-center">
     <the-modal :is-open="isOpen" @close="isOpen = !isOpen">
       <template #title>
         Agendar
@@ -35,24 +35,25 @@ const { isOpen } = useToggle()
       </template>
     </the-modal>
 
-    <article
-      class="flex min-h-[90%] w-full flex-col items-center justify-center space-y-10 md:min-h-max md:justify-between lg:max-w-96">
-      <the-calendar />
-      <Button @click="isOpen = !isOpen">
-        <Plus class="size-6" /> Novo Agendamento
-      </Button>
-      <section class="flex flex-wrap items-center justify-between gap-8 py-2 lg:w-full">
+    <article class="flex w-full flex-col items-center justify-start space-y-10 px-4 lg:h-full lg:max-w-96">
+      <section class="flex w-full items-center justify-between gap-8 py-2">
         <the-dash-card v-for="card in cardData" :key="card.title" :title="card.title" :subtitle="card.subtitle"
           :value="card.value">
-
           <template #icon>
             <component :is="card.icon" class="size-5 text-primary-foreground md:size-10" />
           </template>
         </the-dash-card>
       </section>
+      <Button class="w-full" @click="isOpen = !isOpen">
+        <Plus class="size-6" /> Novo Agendamento
+      </Button>
+
+     <div class="size-full">
+      <the-calendar />
+     </div>
     </article>
 
-    <article class="flex size-full max-w-7xl items-center justify-center">
+    <article class="flex size-full max-w-7xl flex-col items-center justify-center p-1">
       <section
         class="flex size-full flex-wrap items-start justify-center gap-4 overflow-y-auto pb-14 scrollbar-hide md:justify-start md:pb-4">
         <the-schedule-card-pet v-for="n in 18" :key="n" name="Jujuba" time="10:00h" type="cat" />
