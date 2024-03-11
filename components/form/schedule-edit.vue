@@ -273,5 +273,4 @@ const onSubmit = handleSubmit((values) => {
       Salvar
     </Button>
   </form>
-</template>import { weight, age, sex, breeds } from '~/utils/mocks'import { weight, age, sex, breeds } from
-'~/utils/mocks'
+</template>
