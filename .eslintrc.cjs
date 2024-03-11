@@ -10,6 +10,7 @@ module.exports = {
   plugins: ['tailwindcss'],
   rules: {
     'no-console': 'off',
+    'comma-dangle': 'off',
     'no-tabs': 'off',
     'vue/html-indent': 'off',
     'vue/multi-word-component-names': 'off',
