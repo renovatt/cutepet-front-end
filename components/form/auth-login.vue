@@ -3,17 +3,6 @@ import { h } from 'vue'
 import { useForm } from 'vee-validate'
 
 import { toast } from '@/components/ui/toast'
-import { Input } from '@/components/ui/input'
-
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from '@/components/ui/form'
-
-import { Button } from '@/components/ui/button'
 import { loginFormSchema } from '~/schemas/login-form'
 
 const { handleSubmit } = useForm({
@@ -58,7 +47,7 @@ const onSubmit = handleSubmit((values) => {
       </FormField>
 
       <Button type="submit" class="w-full">
-        Cadastrar
+        Fazer login
       </Button>
     </div>
   </form>

@@ -1,28 +1,12 @@
 <script setup>
-import { ChevronLeft, ChevronRight, LayoutGrid, CalendarDays, PawPrint, Settings, LogOut } from 'lucide-vue-next'
+import { ChevronLeft, ChevronRight, Settings, LogOut } from 'lucide-vue-next'
+import { routes } from '~/constants/routes'
+
 const isOpen = ref(true)
 const isActive = computed(() => useRoute().path)
 
-const links = [
-  {
-    name: 'Dashboard',
-    to: '/dashboard',
-    icon: LayoutGrid
-  },
-  {
-    name: 'Agendamentos',
-    to: '/schedule',
-    icon: CalendarDays
-  },
-  {
-    name: 'Raças',
-    to: '/breeds',
-    icon: PawPrint
-  }
-]
-
 const handleLogout = () => {
-  useRouter().push('/login')
+  useRouter().push('/auth/login')
 }
 
 </script>
@@ -44,10 +28,10 @@ const handleLogout = () => {
 
     <nav class="w-full md:mt-5">
       <ul class="flex w-full items-center justify-center gap-2 md:flex-col">
-        <NuxtLink v-for="link in links" :key="link.name" :to="link.to"
-          :class="isActive === link.to ? 'bg-secondary-foreground/5 text-primary' : 'text-muted-foreground'"
+        <NuxtLink v-for="link in routes" :key="link.name" :to="link.href"
+          :class="isActive === link.href ? 'bg-secondary-foreground/5 text-primary' : 'text-muted-foreground'"
           class="flex w-full items-center justify-center gap-5 rounded-lg p-2 transition-all hover:bg-secondary-foreground/5">
-          <component :is="link.icon" :class="isActive === link.to ? 'text-primary' : 'text-muted-foreground'" />
+          <component :is="link.icon" :class="isActive === link.href ? 'text-primary' : 'text-muted-foreground'" />
           <span :class="isOpen ? 'md:flex w-24 hidden' : 'hidden'">{{ link.name }}</span>
         </NuxtLink>
       </ul>

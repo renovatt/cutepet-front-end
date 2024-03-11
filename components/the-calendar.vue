@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { Calendar } from '@/components/ui/calendar'
-
 const date = ref(new Date())
 
 watch(() => date.value, (newDate) => {

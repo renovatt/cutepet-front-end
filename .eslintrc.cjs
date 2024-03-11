@@ -13,6 +13,7 @@ module.exports = {
     'comma-dangle': 'off',
     'no-tabs': 'off',
     'vue/no-template-shadow': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
     'vue/html-indent': 'off',
     'vue/multi-word-component-names': 'off',
     'vue/require-default-prop': 'off',

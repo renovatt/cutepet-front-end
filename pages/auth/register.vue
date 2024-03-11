@@ -15,18 +15,18 @@ definePageMeta({
         <h1 class="text-4xl font-bold text-primary">
           CutePet
         </h1>
-        <span class="text-muted-foreground">Seu sistema de agendamentos para Petshop</span>
+        <span class="text-muted-foreground">Faça uma conta e comece a usar</span>
       </header>
     </template>
 
     <template #form>
-      <form-login />
+      <form-auth-register />
     </template>
 
     <template #footer>
-      <p class="text-xs text-muted-foreground">Ainda nao tem uma conta?
-        <NuxtLink to="/register" class="text-primary hover:underline">
-          Cadastrar
+      <p class="text-xs text-muted-foreground">Já tem uma conta?
+        <NuxtLink to="/auth/login" class="text-primary hover:underline">
+          Login
         </NuxtLink>
       </p>
     </template>

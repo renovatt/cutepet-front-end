@@ -3,47 +3,10 @@ import { h } from 'vue'
 import { format } from 'date-fns'
 import { useForm } from 'vee-validate'
 
-import { CalendarIcon, Check, ChevronsUpDown } from 'lucide-vue-next'
-import { Calendar } from '../ui/calendar'
-import Avatar from '../ui/avatar/Avatar.vue'
-import AvatarImage from '../ui/avatar/AvatarImage.vue'
-import AvatarFallback from '../ui/avatar/AvatarFallback.vue'
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent
-} from '@/components/ui/popover'
-import {
-  Select,
-  SelectItem,
-  SelectGroup,
-  SelectTrigger,
-  SelectContent,
-  SelectValue
-} from '@/components/ui/select'
-import { Textarea } from '@/components/ui/textarea'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { toast } from '@/components/ui/toast'
-import { Input } from '@/components/ui/input'
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from '@/components/ui/form'
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList
-} from '@/components/ui/command'
-import { Button } from '@/components/ui/button'
+import { toast } from '../ui/toast'
 import { cn } from '~/lib/utils'
-import { age, breeds, sex, times, weight } from '~/utils/mocks'
 import { scheduleFormSchema } from '~/schemas/schedule-form'
+import { breeds, age, sex, weight, times } from '~/constants/input-pet-data'
 
 const { handleSubmit, setValues, values } = useForm({
   validationSchema: scheduleFormSchema,
@@ -254,4 +217,4 @@ const onSubmit = handleSubmit((values) => {
       Salvar
     </Button>
   </form>
-</template>
+</template>~/constants/pet

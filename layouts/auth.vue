@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { PawPrint } from 'lucide-vue-next'
-import { Separator } from '@/components/ui/separator'
-import googleIcon from '~/icons/google-icon.vue'
 
 const loginWithGoogle = () => {
   useRouter().push('/dashboard')
@@ -30,7 +28,7 @@ const loginWithGoogle = () => {
         <Button type="button"
           class="w-80 rounded-full border bg-white py-6 text-muted-foreground transition-all hover:bg-secondary-foreground/5"
           @click="loginWithGoogle">
-          <google-icon class="mr-2 size-6" /> Faça login com o Google
+          <icon-google class="mr-2 size-6" /> Faça login com o Google
         </Button>
         <slot name="footer" />
       </section>
