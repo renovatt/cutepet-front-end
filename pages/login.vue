@@ -1,0 +1,34 @@
+<script setup lang="ts">
+import { PawPrint } from 'lucide-vue-next'
+
+definePageMeta({
+  layout: false,
+  middleware: 'auth'
+})
+</script>
+
+<template>
+  <NuxtLayout name="auth">
+    <template #header>
+      <header class="flex flex-col items-center justify-center space-y-2">
+        <PawPrint class="size-10 text-primary" />
+        <h1 class="text-4xl font-bold text-primary">
+          CutePet
+        </h1>
+        <span class="text-muted-foreground">Seu sistema de agendamentos para Petshop</span>
+      </header>
+    </template>
+
+    <template #form>
+      <form-login />
+    </template>
+
+    <template #footer>
+      <p class="text-xs text-muted-foreground">Ainda nao tem uma conta?
+        <NuxtLink to="/register" class="text-primary hover:underline">
+          Cadastrar
+        </NuxtLink>
+      </p>
+    </template>
+  </NuxtLayout>
+</template>

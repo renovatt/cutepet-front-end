@@ -1,6 +1,5 @@
 <script setup>
-import { ChevronLeft, ChevronRight, LayoutGrid, CalendarDays, Building2, Settings, LogOut } from 'lucide-vue-next'
-
+import { ChevronLeft, ChevronRight, LayoutGrid, CalendarDays, PawPrint, Settings, LogOut } from 'lucide-vue-next'
 const isOpen = ref(true)
 const isActive = computed(() => useRoute().path)
 
@@ -16,11 +15,15 @@ const links = [
     icon: CalendarDays
   },
   {
-    name: 'Sem nome',
-    to: '/',
-    icon: Building2
+    name: 'Raças',
+    to: '/breeds',
+    icon: PawPrint
   }
 ]
+
+const handleLogout = () => {
+  useRouter().push('/login')
+}
 
 </script>
 
@@ -58,10 +61,12 @@ const links = [
         <span :class="isOpen ? 'flex w-24' : 'hidden'">Configurações</span>
       </Nuxtlink>
 
-      <UButton class="flex w-full cursor-pointer items-center justify-center gap-5 rounded-lg bg-transparent p-2">
-        <LogOut class="text-muted-foreground hover:text-primary" />
-        <span :class="isOpen ? 'flex w-24 text-muted-foreground hover:text-primary' : 'hidden'">Sair</span>
-      </UButton>
+      <Button
+        class="flex w-full cursor-pointer items-center justify-center gap-5 rounded-lg bg-transparent p-2 text-muted-foreground shadow-none hover:bg-secondary-foreground/5  hover:text-primary"
+        @click="handleLogout">
+        <LogOut class="" />
+        <span :class="isOpen ? 'flex w-24' : 'hidden'">Sair</span>
+      </Button>
 
     </section>
   </aside>
