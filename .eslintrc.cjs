@@ -12,6 +12,7 @@ module.exports = {
     'no-console': 'off',
     'comma-dangle': 'off',
     'no-tabs': 'off',
+    'vue/no-template-shadow': 'off',
     'vue/html-indent': 'off',
     'vue/multi-word-component-names': 'off',
     'vue/require-default-prop': 'off',
