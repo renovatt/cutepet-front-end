@@ -63,7 +63,7 @@ const { isOpen } = useToggle()
 
     <article class="flex size-full max-w-7xl flex-col items-center justify-center p-1">
       <section class="size-full overflow-y-auto rounded-lg pb-14 scrollbar-hide">
-        <the-calendar />
+        <the-full-calendar />
       </section>
     </article>
   </section>
