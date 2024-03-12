@@ -3,6 +3,7 @@ const dog = ref(false)
 const cat = ref(true)
 
 const { breeds: cats, error } = await useCatBreeds()
+const { breeds: dogs, error: dogError } = await useDogBreeds()
 
 </script>
 
@@ -17,19 +18,18 @@ const { breeds: cats, error } = await useCatBreeds()
       </Button>
     </section>
 
-    <article v-show="cat" class="grid w-[80%] gap-4 overflow-y-auto pb-16 scrollbar-hide md:grid-cols-3 md:pb-0">
+    <article v-show="cat" class="grid gap-4 overflow-y-auto pb-16 scrollbar-hide md:grid-cols-2 md:pb-0 xl:grid-cols-3">
       <card-cat-breed v-for="breed in cats" :key="breed.id" :name="breed.name" :affection_level="breed.affection_level"
         :energy_level="breed.energy_level" :intelligence="breed.intelligence" :life_span="breed.life_span"
         :image="breed.image" />
     </article>
 
-    <article v-show="dog" class="grid w-[80%] gap-4 overflow-y-auto pb-16 scrollbar-hide md:grid-cols-3 md:pb-0">
-      <section v-for="n in 70" :key="n"
-        class="flex h-40 w-full max-w-96 items-center justify-center rounded-lg border p-2 shadow md:w-96">
-        <h1>Dog</h1>
-      </section>
+    <article v-show="dog" class="grid gap-4 overflow-y-auto pb-16 scrollbar-hide md:grid-cols-2 md:pb-0 xl:grid-cols-3">
+      <card-dog-breed v-for="breed in dogs" :key="breed.id" :name="breed.name" :life_span="breed.life_span"
+        :reference_image_id="breed.reference_image_id" :temperament="breed.temperament" />
     </article>
 
-    <span :v-show="error">{{ error?.message }}</span>
+    <span v-show="error">cat:{{ error?.message }}</span>
+    <span v-show="dogError">dog:{{ dogError?.message }}</span>
   </section>
 </template>

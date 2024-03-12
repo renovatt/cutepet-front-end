@@ -4,7 +4,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       catBaseURL: process.env.NUXT_CAT_BASE_URL,
-      catApiKey: process.env.NUXT_CAT_API_KEY
+      catApiKey: process.env.NUXT_CAT_API_KEY,
+
+      dogBaseURL: process.env.NUXT_DOG_BASE_URL,
+      dogApiKey: process.env.NUXT_DOG_API_KEY
     }
   },
   modules: [

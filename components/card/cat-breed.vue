@@ -15,7 +15,7 @@ const {
 </script>
 
 <template>
-  <section class="flex w-full max-w-96 items-center justify-center rounded-lg border p-2 shadow md:w-96">
+  <section class="flex w-full max-w-96 items-center justify-center rounded-lg border p-2 shadow">
     <article class="flex flex-col items-center justify-start gap-4 p-2 md:w-full md:flex-row">
       <figure class="size-32">
         <img v-if="image?.url" :src="image?.url" :alt="name" class="size-32 rounded-lg object-cover">
@@ -36,17 +36,17 @@ const {
 
           <span class="flex items-center justify-center gap-2 text-primary">
             <span class="text-xs font-bold text-muted-foreground">Inteligência:</span>
-            <Brain v-for="n in intelligence" :key="n" class="size-4 text-primary" />
+            <Brain v-for="n in intelligence" :key="n" class="size-3 text-primary" />
           </span>
 
           <span class="flex items-center justify-center gap-2 text-primary">
             <span class="text-xs font-bold text-muted-foreground">Afeição:</span>
-            <Heart v-for="n in affection_level" :key="n" class="size-4 text-primary" />
+            <Heart v-for="n in affection_level" :key="n" class="size-3 text-primary" />
           </span>
 
           <span class="flex items-center justify-center gap-2 text-primary">
             <span class="text-xs font-bold text-muted-foreground">Energia:</span>
-            <Zap v-for="n in energy_level" :key="n" class="size-4 text-primary" />
+            <Zap v-for="n in energy_level" :key="n" class="size-3 text-primary" />
           </span>
         </section>
       </section>
