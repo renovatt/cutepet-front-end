@@ -1,6 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  runtimeConfig: {
+    public: {
+      catBaseURL: process.env.NUXT_CAT_BASE_URL,
+      catApiKey: process.env.NUXT_CAT_API_KEY
+    }
+  },
   modules: [
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
