@@ -14,12 +14,13 @@ export const scheduleFormSchema = toTypedSchema(z.object({
     }
   }),
   breed: z.object({
-    id: z.string(),
-    label: z.string(),
-    avatar: z.object({
-      src: z.string()
-    })
-  })
+    id: z.string().transform(val => val.toString()),
+    name: z.string(),
+    image: z.object({
+      url: z.string()
+    }),
+    reference_image_id: z.string(),
+  }),
 }))
 
 export const PetProps: typeof scheduleFormSchema = (scheduleFormSchema as typeof scheduleFormSchema)
