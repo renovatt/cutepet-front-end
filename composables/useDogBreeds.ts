@@ -6,12 +6,13 @@ export interface DogBreed {
   temperament: string
 }
 
-export const useDogBreeds = async() => {
+export const useDogBreeds = () => {
   const config = useRuntimeConfig()
-  const { data: breeds, error, pending, status } = await useFetch(config.public.dogBaseURL, {
+  const { data: breeds, error, pending, status } = useFetch(config.public.dogBaseURL, {
     headers: {
       'x-api-key': config.public.dogApiKey
     },
+    lazy: false,
     server: false,
     transform: (breeds: DogBreed[]) => {
       return breeds.map((breed: DogBreed) => ({

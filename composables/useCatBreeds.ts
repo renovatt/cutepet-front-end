@@ -17,12 +17,13 @@ export interface CatBreed {
   description: string
 }
 
-export const useCatBreeds = async() => {
+export const useCatBreeds = () => {
   const config = useRuntimeConfig()
-  const { data: breeds, error, pending, status } = await useFetch(config.public.catBaseURL, {
+  const { data: breeds, error, pending, status } = useFetch(config.public.catBaseURL, {
     headers: {
       'x-api-key': config.public.catApiKey
     },
+    lazy: false,
     server: false,
     transform: (breeds: CatBreed[]) => {
       return breeds.map((breed: CatBreed) => ({
