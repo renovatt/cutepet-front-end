@@ -34,6 +34,8 @@ const handleLogout = () => {
           <component :is="link.icon" :class="isActive === link.href ? 'text-primary' : 'text-muted-foreground'" />
           <span :class="isOpen ? 'md:flex w-24 hidden' : 'hidden'">{{ link.name }}</span>
         </NuxtLink>
+
+        <the-nav-dropdown :sidebar="isOpen" />
       </ul>
     </nav>
 
@@ -51,7 +53,6 @@ const handleLogout = () => {
         <LogOut class="" />
         <span :class="isOpen ? 'flex w-24' : 'hidden'">Sair</span>
       </Button>
-
     </section>
   </aside>
 </template>

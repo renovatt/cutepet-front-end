@@ -1,4 +1,4 @@
-import { LayoutGrid, CalendarDays, PawPrint } from 'lucide-vue-next'
+import { LayoutGrid, CalendarDays, PawPrint, Cat, Dog } from 'lucide-vue-next'
 
 export const routes = [
   {
@@ -11,9 +11,40 @@ export const routes = [
     href: '/schedule',
     icon: CalendarDays
   },
-  {
-    name: 'Raças',
-    href: '/breeds',
-    icon: PawPrint
-  }
 ]
+
+export const breedsDropdownRoutes = {
+  name: 'Raças',
+  path: '/breeds',
+  icon: PawPrint,
+  children: [
+    {
+      name: 'Gatos',
+      path: '/breeds/cats',
+      icon: Cat
+    },
+    {
+      name: 'Cães',
+      path: '/breeds/dogs',
+      icon: Dog
+    }
+  ]
+}
+
+export const breedsDropdown = {
+  name: 'Raças',
+  path: '/breeds',
+  icon: PawPrint,
+  children: [
+    {
+      name: 'Gatos',
+      path: '/breeds/cats',
+      icon: Cat
+    },
+    {
+      name: 'Cães',
+      path: '/breeds/dogs',
+      icon: Dog
+    }
+  ]
+}
