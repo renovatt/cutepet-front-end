@@ -10,13 +10,8 @@ const {
   reference_image_id
 } = defineProps<Partial<DogBreed>>()
 
-function translateTemperaments(words: string) {
-  return words.split(', ')
-    .map(word => temperaments[word as keyof typeof temperaments] || word)
-    .join(', ')
-}
 const lifeSpan = computed(() => life_span?.replace('years', 'anos') ?? '')
-const translatedTemperament = (computed(() => translateTemperaments(temperament ?? '')))
+const translatedTemperament = (computed(() => translatedWord(temperaments, temperament ?? '')))
 
 const imageUrl = ref(`https://cdn2.thedogapi.com/images/${reference_image_id}.jpg`)
 
