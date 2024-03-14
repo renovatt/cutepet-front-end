@@ -14,18 +14,18 @@ const { breeds: dogs, error: dogError } = await useDogBreeds()
         Gatos
       </Button>
       <Button class="w-40" @click="dog = true; cat = false">
-        Cachorros
+        Cães
       </Button>
     </section>
 
     <article v-show="cat" class="grid gap-4 overflow-y-auto pb-16 scrollbar-hide md:grid-cols-2 md:pb-0 xl:grid-cols-3">
-      <card-cat-breed v-for="breed in cats" :key="breed.id" :name="breed.name" :affection_level="breed.affection_level"
+      <card-breed-cat v-for="breed in cats" :key="breed.id" :name="breed.name" :affection_level="breed.affection_level"
         :energy_level="breed.energy_level" :intelligence="breed.intelligence" :life_span="breed.life_span"
         :image="breed.image" />
     </article>
 
     <article v-show="dog" class="grid gap-4 overflow-y-auto pb-16 scrollbar-hide md:grid-cols-2 md:pb-0 xl:grid-cols-3">
-      <card-dog-breed v-for="breed in dogs" :key="breed.id" :name="breed.name" :life_span="breed.life_span"
+      <card-breed-dog v-for="breed in dogs" :key="breed.id" :name="breed.name" :life_span="breed.life_span"
         :reference_image_id="breed.reference_image_id" :temperament="breed.temperament" />
     </article>
 

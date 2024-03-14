@@ -6,7 +6,7 @@ const isOpen = ref(true)
 const isActive = computed(() => useRoute().path)
 
 const handleLogout = () => {
-  useRouter().push('/auth/login')
+  useRouter().push('/')
 }
 
 </script>

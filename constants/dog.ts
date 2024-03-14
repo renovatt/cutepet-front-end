@@ -1,4 +1,7 @@
 export const temperaments = {
+  Attentive: 'Atencioso',
+  Brave: 'Bravo',
+  Responsible: 'Responsável',
   Vigilant: 'Vigilante',
   Spunky: 'Bravo',
   Charming: 'Encantador',

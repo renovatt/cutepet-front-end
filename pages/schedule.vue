@@ -30,34 +30,34 @@ const { isOpen } = useToggle()
       <template #content>
         <section class="mt-2 flex flex-col items-start justify-around gap-4 rounded-lg p-4 md:flex-row">
           <form-schedule-create />
-          <the-preview-pet-card />
+          <card-pet-preview />
         </section>
       </template>
     </the-modal>
 
     <article class="flex w-full flex-col items-center justify-start space-y-10 px-4 lg:h-full lg:max-w-96">
       <section class="flex w-full items-center justify-between gap-8 py-2">
-        <the-dash-card v-for="card in cardData" :key="card.title" :title="card.title" :subtitle="card.subtitle"
+        <card-schedules-data v-for="card in cardData" :key="card.title" :title="card.title" :subtitle="card.subtitle"
           :value="card.value">
           <template #icon>
             <component :is="card.icon" class="size-5 text-primary-foreground md:size-10" />
           </template>
-        </the-dash-card>
+        </card-schedules-data>
       </section>
       <Button class="w-full" @click="isOpen = !isOpen">
         <Plus class="size-6" /> Novo Agendamento
       </Button>
 
      <div class="size-full">
-      <the-calendar />
+      <calendar-picker />
      </div>
     </article>
 
     <article class="flex size-full max-w-7xl flex-col items-center justify-center p-1">
       <section
         class="flex size-full flex-wrap items-start justify-center gap-4 overflow-y-auto pb-14 scrollbar-hide md:justify-start md:pb-4">
-        <the-schedule-card-pet v-for="n in 18" :key="n" name="Jujuba" time="10:00h" type="cat" />
-        <the-schedule-card-pet v-for="n in 28" :key="n" name="Jubileu" time="13:00h" type="dog" />
+        <card-pet-scheduled v-for="n in 18" :key="n" name="Jujuba" time="10:00h" type="cat" />
+        <card-pet-scheduled v-for="n in 28" :key="n" name="Jubileu" time="13:00h" type="dog" />
       </section>
     </article>
   </section>

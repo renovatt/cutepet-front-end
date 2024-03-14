@@ -42,19 +42,19 @@ const { isOpen } = useToggle()
       <template #content>
         <section class="mt-2 flex flex-col items-start justify-around gap-4 rounded-lg p-4 md:flex-row">
           <form-schedule-create />
-          <the-preview-pet-card />
+          <card-pet-preview />
         </section>
       </template>
     </the-modal>
 
     <article class="flex flex-col items-center justify-start space-y-10 px-4 lg:h-full lg:max-w-96">
        <section class="flex flex-wrap items-center justify-between gap-8 py-2 lg:w-full">
-        <the-dash-card v-for="card in cardData" :key="card.title" :title="card.title" :subtitle="card.subtitle"
+        <card-schedules-data v-for="card in cardData" :key="card.title" :title="card.title" :subtitle="card.subtitle"
           :value="card.value">
           <template #icon>
             <component :is="card.icon" class="size-5 text-secondary md:size-10" />
           </template>
-        </the-dash-card>
+        </card-schedules-data>
       </section>
       <Button class="w-full" @click="isOpen = !isOpen">
         <Plus class="size-6" /> Novo Agendamento
@@ -63,7 +63,7 @@ const { isOpen } = useToggle()
 
     <article class="flex size-full max-w-7xl flex-col items-center justify-center p-1">
       <section class="size-full overflow-y-auto rounded-lg pb-14 scrollbar-hide">
-        <the-full-calendar />
+        <calendar-custom />
       </section>
     </article>
   </section>
