@@ -6,41 +6,36 @@ import { CalendarIcon, Check, ChevronsUpDown } from 'lucide-vue-next'
 
 import { toast } from '../ui/toast'
 import { cn } from '~/lib/utils'
-import { breeds, age, sex, weight, times } from '~/constants/input-pet-data'
 import { scheduleFormSchema } from '~/schemas/schedule-form'
+import { age, sex, weight, times } from '~/constants/inputs'
 
-const dateByApi = ref(new Date('2024-03-30T15:35:39.078Z'))
-
-const petData = {
+const defaultValues = {
+  pet: 'dog' as 'dog' | 'cat',
   petname: 'Jujuba',
+  breed: {
+    id: '6',
+    name: 'Akita',
+    reference_image_id: 'BFRYBufpm',
+    image: {
+      url: 'https://cdn2.thedogapi.com/images/BFRYBufpm.jpg',
+    },
+  },
   age: '1a-2a',
   weight: '20kg-40kg',
   sex: 'macho',
+  date: new Date('2024-03-30T15:35:39.078Z'),
   time: '10:00',
-  breed: {
-    id: 'Atinux',
-    label: 'Atinux',
-    avatar: {
-      src: 'https://avatars.githubusercontent.com/u/904724?v=4'
-    }
-  },
   obs: 'Cuidado, ele morde quando esta com fome!',
-  date: dateByApi.value,
 }
 
 const { handleSubmit, setValues, values } = useForm({
   validationSchema: scheduleFormSchema,
-  initialValues: {
-    petname: petData.petname,
-    obs: petData.obs,
-    weight: petData.weight,
-    age: petData.age,
-    sex: petData.sex,
-    time: petData.time,
-    breed: breeds[0],
-    date: petData.date
-  }
+  initialValues: defaultValues
 })
+
+const chosenPet = ref(defaultValues.pet)
+
+const { cats, dogs } = usePets()
 
 const onSubmit = handleSubmit((values) => {
   console.log(values)
@@ -49,6 +44,7 @@ const onSubmit = handleSubmit((values) => {
     description: h('pre', { class: 'mt-2 w-[340px] rounded-md bg-slate-950 p-4' }, h('code', { class: 'text-white' }, JSON.stringify(values, null, 2)))
   })
 })
+
 </script>
 
 <template>
@@ -66,7 +62,8 @@ const onSubmit = handleSubmit((values) => {
         </FormItem>
       </FormField>
 
-      <FormField name="breed">
+      <!-- cat breeds -->
+      <FormField v-if="chosenPet === 'cat'" name="breed">
         <FormItem class="flex h-20 w-full flex-col md:w-[200px]">
           <FormLabel>Raça</FormLabel>
           <Popover>
@@ -75,12 +72,62 @@ const onSubmit = handleSubmit((values) => {
                 <Button variant="outline" role="combobox" aria-expanded="open" aria-label="Escholha a raça"
                   :class="cn('md:w-[200px] justify-between capitalize', !values.breed?.id && 'text-muted-foreground')">
                   <Avatar class="mr-2 size-5">
-                    <AvatarImage :src="values?.breed?.avatar?.src ?? ''" :alt="values.breed?.label" />
+                    <AvatarImage :src="values?.breed?.image?.url ?? ''" :alt="values.breed?.name" />
                     <AvatarFallback>P</AvatarFallback>
                   </Avatar>
                   <span class="w-20 truncate">
-                    {{ values.breed?.id ? breeds.find((breed) =>
-    breed.id === values.breed?.id)?.label : 'Escholha a raça' }}
+                    {{ values.breed?.id ? cats?.find((breed) =>
+    breed.id === values.breed?.id)?.name : 'Escholha a raça' }}
+                  </span>
+                  <ChevronsUpDown class="ml-2 size-4 shrink-0 opacity-50" />
+                </Button>
+              </FormControl>
+            </PopoverTrigger>
+            <PopoverContent class="w-44 p-0">
+              <Command>
+                <CommandInput placeholder="Siamese" />
+                <CommandEmpty>Nada encontrado.</CommandEmpty>
+                <CommandList>
+                  <CommandGroup>
+                    <CommandItem v-for="breed in cats" :key="breed.id" :value="breed.id"
+                      @select="() => { setValues({ breed }) }">
+                      <Avatar class="mr-2 size-5">
+                        <AvatarImage v-if="breed?.image?.url" :src="breed?.image?.url" :alt="breed.name" />
+                        <AvatarFallback>P</AvatarFallback>
+                      </Avatar>
+                      {{ breed.name }}
+                      <Check
+                        :class="cn('ml-auto h-4 w-4', breed.id === (values.breed?.id ?? '') ? 'opacity-100' : 'opacity-0')" />
+                    </CommandItem>
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+          <div class="h-5 w-full">
+            <FormMessage />
+          </div>
+        </FormItem>
+      </FormField>
+
+      <!-- dog breeds -->
+      <FormField v-else name="breed">
+        <FormItem class="flex h-20 w-full flex-col md:w-[200px]">
+          <FormLabel>Raça</FormLabel>
+          <Popover>
+            <PopoverTrigger as-child>
+              <FormControl>
+                <Button variant="outline" role="combobox" aria-expanded="open" aria-label="Escholha a raça"
+                  :class="cn('md:w-[200px] justify-between capitalize', !values.breed?.id && 'text-muted-foreground')">
+                  <Avatar class="mr-2 size-5">
+                    <AvatarImage
+                      :src="`https://cdn2.thedogapi.com/images/${values?.breed?.reference_image_id}.jpg` ?? ''"
+                      :alt="values.breed?.name" />
+                    <AvatarFallback>P</AvatarFallback>
+                  </Avatar>
+                  <span class="w-20 truncate">
+                    {{ values.breed?.name ? dogs.find((breed) =>
+    breed.name === values.breed?.name)?.name : 'Escholha a raça' }}
                   </span>
                   <ChevronsUpDown class="ml-2 size-4 shrink-0 opacity-50" />
                 </Button>
@@ -92,15 +139,27 @@ const onSubmit = handleSubmit((values) => {
                 <CommandEmpty>Nada encontrado.</CommandEmpty>
                 <CommandList>
                   <CommandGroup>
-                    <CommandItem v-for="breed in breeds" :key="breed.id" :value="breed.id"
-                      @select="() => { setValues({ breed }) }">
+                    <CommandItem v-for="breed in dogs" :key="breed.id" :value="breed.name" @select="() => {
+    setValues({
+      breed: {
+        ...breed,
+        id: breed.name,
+        image: {
+          url: `https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`
+        },
+        reference_image_id: breed.reference_image_id
+      }
+    })
+  }">
                       <Avatar class="mr-2 size-5">
-                        <AvatarImage :src="breed.avatar.src" :alt="breed.label" />
+                        <AvatarImage v-if="breed?.reference_image_id"
+                          :src="`https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`"
+                          :alt="breed.name" />
                         <AvatarFallback>P</AvatarFallback>
                       </Avatar>
-                      {{ breed.label }}
+                      {{ breed.name }}
                       <Check
-                        :class="cn('ml-auto h-4 w-4', breed.id === (values.breed?.id ?? '') ? 'opacity-100' : 'opacity-0')" />
+                        :class="cn('ml-auto h-4 w-4', breed.name === (values.breed?.name ?? '') ? 'opacity-100' : 'opacity-0')" />
                     </CommandItem>
                   </CommandGroup>
                 </CommandList>
@@ -237,4 +296,4 @@ const onSubmit = handleSubmit((values) => {
       Salvar
     </Button>
   </form>
-</template>~/constants/mocks~/constants/pet
+</template>~/constants/inputs
