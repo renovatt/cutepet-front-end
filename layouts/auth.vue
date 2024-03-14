@@ -9,7 +9,7 @@ const loginWithGoogle = () => {
 <template>
   <section class="flex h-screen w-full flex-col-reverse justify-between bg-primary-foreground/5 p-2">
     <article
-      class="container flex size-full flex-col items-center justify-center overflow-y-auto rounded-3xl p-4 md:flex-row">
+      class="container flex size-full flex-col items-center justify-center overflow-y-auto rounded-3xl p-4 scrollbar-hide md:flex-row">
       <section class="hidden size-full place-items-center bg-black/20 md:grid md:w-1/2">
         <PawPrint class="size-40 text-primary" />
         <h1 class="text-6xl font-bold text-primary">
@@ -17,7 +17,7 @@ const loginWithGoogle = () => {
         </h1>
       </section>
 
-      <section class="grid w-full place-items-center space-y-10 md:w-1/2">
+      <section class="grid w-full place-items-center space-y-6 md:w-1/2">
         <slot name="header" />
         <slot name="form" />
         <div class="flex items-center justify-center gap-2">
