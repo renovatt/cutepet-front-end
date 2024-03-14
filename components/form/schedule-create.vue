@@ -7,32 +7,7 @@ import { ChevronsUpDown, Check, CalendarIcon, Cat, Dog } from 'lucide-vue-next'
 import { toast } from '../ui/toast'
 import { cn } from '~/lib/utils'
 import { scheduleFormSchema } from '~/schemas/schedule-form'
-import { age, sex, weight, times } from '~/constants/input-pet-data'
-
-const catViralata = {
-  id: 'viralata',
-  name: 'Viralata',
-  life_span: '',
-  description: '',
-  affection_level: 0,
-  energy_level: 0,
-  intelligence: 0,
-  image: {
-    url: '',
-    height: 0,
-    width: 0,
-    id: ''
-  },
-  reference_image_id: ''
-}
-
-const dogViralata = {
-  id: 0,
-  name: 'Viralata',
-  life_span: '',
-  temperament: '',
-  reference_image_id: '',
-}
+import { age, sex, weight, times } from '~/constants/inputs'
 
 const defaultValues = {
   petname: '',
@@ -49,6 +24,7 @@ const defaultValues = {
       url: ''
     }
   },
+  pet: 'dog' as 'dog' | 'cat',
   date: new Date()
 }
 
@@ -56,22 +32,18 @@ const { handleSubmit, setValues, values } = useForm({
   validationSchema: scheduleFormSchema,
   initialValues: defaultValues
 })
+
 const chosenPet = ref(false)
-const newArrayCats = ref<(typeof catViralata)[]>([])
-const newArrayDogs = ref<(typeof dogViralata)[]>([])
-
-const { breeds: cats } = useCatBreeds()
-const { breeds: dogs } = useDogBreeds()
-
-watch([cats, dogs], ([newCats, newDogs]) => {
-  if (newCats && newDogs) {
-    newArrayCats.value = [catViralata, ...newCats]
-    newArrayDogs.value = [dogViralata, ...newDogs]
-  }
-})
+const { cats, dogs } = usePets()
 
 watch(chosenPet, () => {
   setValues({ breed: defaultValues.breed })
+
+  if (chosenPet.value) {
+    setValues({ pet: 'cat' })
+  } else {
+    setValues({ pet: 'dog' })
+  }
 })
 
 const onSubmit = handleSubmit((values) => {
@@ -87,7 +59,7 @@ const onSubmit = handleSubmit((values) => {
   <section class="flex w-full flex-col space-y-6 rounded border p-2 shadow md:w-2/3">
     <section class="flex w-full items-center justify-start gap-4">
       <Button @click="chosenPet = !chosenPet">
-       O pet é um:
+        O pet é um:
       </Button>
 
       <div v-if="chosenPet" class="flex size-16 flex-col items-center justify-center">
@@ -129,8 +101,8 @@ const onSubmit = handleSubmit((values) => {
                       <AvatarFallback>P</AvatarFallback>
                     </Avatar>
                     <span class="w-20 truncate">
-                      {{ values.breed?.id ? newArrayCats?.find((breed) =>
-                        breed.id === values.breed?.id)?.name : 'Escholha a raça' }}
+                      {{ values.breed?.id ? cats?.find((breed) =>
+        breed.id === values.breed?.id)?.name : 'Escholha a raça' }}
                     </span>
                     <ChevronsUpDown class="ml-2 size-4 shrink-0 opacity-50" />
                   </Button>
@@ -142,7 +114,7 @@ const onSubmit = handleSubmit((values) => {
                   <CommandEmpty>Nada encontrado.</CommandEmpty>
                   <CommandList>
                     <CommandGroup>
-                      <CommandItem v-for="breed in newArrayCats" :key="breed.id" :value="breed.id"
+                      <CommandItem v-for="breed in cats" :key="breed.id" :value="breed.id"
                         @select="() => { setValues({ breed }) }">
                         <Avatar class="mr-2 size-5">
                           <AvatarImage v-if="breed?.image?.url" :src="breed?.image?.url" :alt="breed.name" />
@@ -172,13 +144,14 @@ const onSubmit = handleSubmit((values) => {
                   <Button variant="outline" role="combobox" aria-expanded="open" aria-label="Escholha a raça"
                     :class="cn('md:w-[200px] justify-between capitalize', !values.breed?.id && 'text-muted-foreground')">
                     <Avatar class="mr-2 size-5">
-                      <AvatarImage :src="`https://cdn2.thedogapi.com/images/${values?.breed?.reference_image_id}.jpg`"
+                      <AvatarImage
+                        :src="`https://cdn2.thedogapi.com/images/${values?.breed?.reference_image_id}.jpg` ?? ''"
                         :alt="values.breed?.name" />
                       <AvatarFallback>P</AvatarFallback>
                     </Avatar>
                     <span class="w-20 truncate">
-                      {{ values.breed?.name ? newArrayDogs?.find((breed) =>
-                        breed.name === values.breed?.name)?.name : 'Escholha a raça' }}
+                      {{ values.breed?.name ? dogs?.find((breed) =>
+        breed.name === values.breed?.name)?.name : 'Escholha a raça' }}
                     </span>
                     <ChevronsUpDown class="ml-2 size-4 shrink-0 opacity-50" />
                   </Button>
@@ -190,18 +163,18 @@ const onSubmit = handleSubmit((values) => {
                   <CommandEmpty>Nada encontrado.</CommandEmpty>
                   <CommandList>
                     <CommandGroup>
-                      <CommandItem v-for="breed in newArrayDogs" :key="breed.id" :value="breed.name" @select="() => {
-                        setValues({
-                          breed: {
-                            ...breed,
-                            id: breed.id.toString(),
-                            image: {
-                              url: `https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`
-                            },
-                            reference_image_id: breed.reference_image_id
-                          }
-                        })
-                      }">
+                      <CommandItem v-for="breed in dogs" :key="breed.id" :value="breed.name" @select="() => {
+        setValues({
+          breed: {
+            ...breed,
+            id: breed.name,
+            image: {
+              url: `https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`
+            },
+            reference_image_id: breed.reference_image_id
+          }
+        })
+      }">
                         <Avatar class="mr-2 size-5">
                           <AvatarImage v-if="breed?.reference_image_id"
                             :src="`https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`"
@@ -348,4 +321,4 @@ const onSubmit = handleSubmit((values) => {
       </Button>
     </form>
   </section>
-</template>
+</template>~/constants/inputs
