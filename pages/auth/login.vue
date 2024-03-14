@@ -10,10 +10,10 @@ definePageMeta({
 <template>
   <NuxtLayout name="auth">
     <template #header>
-      <header class="flex flex-col items-center justify-center space-y-2">
-        <PawPrint class="size-10 text-primary" />
-        <h1 class="text-4xl font-bold text-primary">
+      <header class="flex w-full max-w-80 flex-col items-start justify-center space-y-2">
+        <h1 class="relative text-4xl font-bold text-primary">
           CutePet
+          <PawPrint class="absolute -right-5 -top-2 size-5 text-primary" />
         </h1>
         <span class="text-muted-foreground">Seu sistema de agendamentos para Petshop</span>
       </header>

@@ -26,7 +26,7 @@ const loginWithGoogle = () => {
           <Separator class="w-36" />
         </div>
         <Button type="button"
-          class="w-80 rounded-full border bg-white py-6 text-muted-foreground transition-all hover:bg-secondary-foreground/5"
+          class="w-80 rounded-full border bg-white py-5 text-muted-foreground transition-all hover:bg-secondary-foreground/5"
           @click="loginWithGoogle">
           <icon-google class="mr-2 size-6" /> Faça login com o Google
         </Button>
