@@ -1,3 +1,5 @@
+import { breedsCatTranslation } from '~/constants/breeds-cat-translation'
+
 export interface Image {
   id: string
   width: number
@@ -14,7 +16,6 @@ export interface CatBreed {
   energy_level: number
   reference_image_id: string
   image: Image
-  description: string
 }
 
 export const useCatBreeds = () => {
@@ -28,14 +29,13 @@ export const useCatBreeds = () => {
     transform: (breeds: CatBreed[]) => {
       return breeds.map((breed: CatBreed) => ({
         id: breed.id,
-        name: breed.name,
+        name: translateWord(breedsCatTranslation, breed.name),
         image: breed.image,
         life_span: breed.life_span,
         intelligence: breed.intelligence,
         affection_level: breed.affection_level,
         energy_level: breed.energy_level,
         reference_image_id: breed.reference_image_id,
-        description: breed.description
       }))
     }
   })

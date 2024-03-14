@@ -34,6 +34,7 @@ const { handleSubmit, setValues, values } = useForm({
 })
 
 const chosenPet = ref(false)
+
 const { cats, dogs } = usePets()
 
 watch(chosenPet, () => {
@@ -110,7 +111,7 @@ const onSubmit = handleSubmit((values) => {
               </PopoverTrigger>
               <PopoverContent class="w-44 p-0">
                 <Command>
-                  <CommandInput placeholder="Siamese" />
+                  <CommandInput placeholder="Siamês" />
                   <CommandEmpty>Nada encontrado.</CommandEmpty>
                   <CommandList>
                     <CommandGroup>

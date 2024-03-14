@@ -1,7 +1,6 @@
 <!-- eslint-disable camelcase -->
 <script setup lang="ts">
 import type { DogBreed } from '~/composables/useDogBreeds'
-import { temperaments } from '~/constants/dog'
 
 const {
   name,
@@ -11,7 +10,6 @@ const {
 } = defineProps<Partial<DogBreed>>()
 
 const lifeSpan = computed(() => life_span?.replace('years', 'anos') ?? '')
-const translatedTemperament = (computed(() => translatedWord(temperaments, temperament ?? '')))
 
 const imageUrl = ref(`https://cdn2.thedogapi.com/images/${reference_image_id}.jpg`)
 
@@ -42,7 +40,7 @@ const handleError = () => {
 
           <span v-if="temperament?.length" class="flex flex-col items-start justify-center gap-2 text-primary">
             <span class="text-xs font-bold text-muted-foreground">Temperamentos:</span>
-            <span class="text-start text-xs font-semibold">{{ translatedTemperament }}</span>
+            <span class="text-start text-xs font-semibold">{{ temperament }}</span>
           </span>
 
           <span v-else class="flex flex-col items-start justify-center gap-2 text-primary">

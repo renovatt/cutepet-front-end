@@ -1,4 +1,4 @@
-export const temperaments = {
+export const temperamentsTranslation = {
   Attentive: 'Atencioso',
   Brave: 'Bravo',
   Responsible: 'Responsável',

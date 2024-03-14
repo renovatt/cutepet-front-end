@@ -1,3 +1,6 @@
+import { temperamentsTranslation } from '~/constants/temperaments-translation'
+import { breedsDogTranslation } from '~/constants/breeds-dog-translation'
+
 export interface DogBreed {
   id: number
   name: string
@@ -17,9 +20,9 @@ export const useDogBreeds = () => {
     transform: (breeds: DogBreed[]) => {
       return breeds.map((breed: DogBreed) => ({
         id: breed.id,
-        name: breed.name,
+        name: translateWord(breedsDogTranslation, breed.name),
         life_span: breed.life_span,
-        temperament: breed.temperament,
+        temperament: translateWord(temperamentsTranslation, breed.temperament ?? ''),
         reference_image_id: breed.reference_image_id,
       }))
     }
