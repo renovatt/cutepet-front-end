@@ -7,14 +7,15 @@ import { ChevronsUpDown, Check, CalendarIcon, Cat, Dog } from 'lucide-vue-next'
 import { toast } from '../ui/toast'
 import { cn } from '~/lib/utils'
 import { scheduleFormSchema } from '~/schemas/schedule-form'
-import { age, sex, weight, times } from '~/constants/inputs'
+import { age, sex, weight, services, times } from '~/constants/inputs'
 
 const defaultValues = {
   petname: '',
-  obs: '',
+  obs: 'Sem observações.',
   weight: weight[0].value,
   age: age[0].value,
   sex: sex[0].value,
+  service: services[0].value,
   time: '',
   breed: {
     id: 'viralata',
@@ -57,24 +58,24 @@ const onSubmit = handleSubmit((values) => {
 </script>
 
 <template>
-  <section class="flex w-full flex-col space-y-6 rounded border p-2 shadow md:w-2/3">
+  <section class="flex w-full flex-col space-y-2 rounded border p-2 shadow md:w-2/3">
     <section class="flex w-full items-center justify-start gap-4">
       <Button @click="chosenPet = !chosenPet">
         O pet é um:
       </Button>
 
-      <div v-if="chosenPet" class="flex size-16 items-center justify-center gap-2">
+      <div v-if="chosenPet" class="flex size-16 items-center justify-between gap-2">
         <Cat class="text-primary " />
         <p>Gato</p>
       </div>
 
-      <div v-else class="flex size-16 items-center justify-center gap-2">
+      <div v-else class="flex size-16 items-center justify-between gap-2">
         <Dog class="text-primary " />
         <p>Cão</p>
       </div>
     </section>
 
-    <form class="w-full space-y-6" @submit="onSubmit">
+    <form class="w-full space-y-2" @submit="onSubmit">
       <div class="flex w-full flex-col items-center justify-between gap-4 md:flex-row">
         <FormField v-slot="{ componentField }" name="petname">
           <FormItem class="w-full md:w-44">
@@ -208,13 +209,15 @@ const onSubmit = handleSubmit((values) => {
                   <FormControl>
                     <RadioGroupItem :value="option.value" />
                   </FormControl>
-                  <FormLabel class="font-normal">
+                  <FormLabel class="cursor-pointer font-normal">
                     {{ option.label }}
                   </FormLabel>
                 </FormItem>
               </RadioGroup>
             </FormControl>
-            <FormMessage />
+            <div class="h-5 w-full">
+              <FormMessage />
+            </div>
           </FormItem>
         </FormField>
 
@@ -227,13 +230,15 @@ const onSubmit = handleSubmit((values) => {
                   <FormControl>
                     <RadioGroupItem :value="option.value" />
                   </FormControl>
-                  <FormLabel class="font-normal">
+                  <FormLabel class="cursor-pointer font-normal">
                     {{ option.label }}
                   </FormLabel>
                 </FormItem>
               </RadioGroup>
             </FormControl>
-            <FormMessage />
+            <div class="h-5 w-full">
+              <FormMessage />
+            </div>
           </FormItem>
         </FormField>
 
@@ -246,13 +251,15 @@ const onSubmit = handleSubmit((values) => {
                   <FormControl>
                     <RadioGroupItem :value="option.value" />
                   </FormControl>
-                  <FormLabel class="font-normal">
+                  <FormLabel class="cursor-pointer font-normal">
                     {{ option.label }}
                   </FormLabel>
                 </FormItem>
               </RadioGroup>
             </FormControl>
-            <FormMessage />
+            <div class="h-5 w-full">
+              <FormMessage />
+            </div>
           </FormItem>
         </FormField>
       </div>
@@ -304,6 +311,27 @@ const onSubmit = handleSubmit((values) => {
           </FormItem>
         </FormField>
       </div>
+
+      <FormField v-slot="{ componentField }" type="radio" name="service">
+        <FormItem class="space-y-3">
+          <FormLabel>Atendimento</FormLabel>
+          <FormControl>
+            <RadioGroup class="flex flex-col gap-2 space-y-1 md:flex-row md:gap-10" v-bind="componentField">
+              <FormItem v-for="option in services" :key="option.value" class="flex items-center gap-x-3 space-y-0">
+                <FormControl>
+                  <RadioGroupItem :value="option.value" />
+                </FormControl>
+                <FormLabel class="cursor-pointer font-normal">
+                  {{ option.label }}
+                </FormLabel>
+              </FormItem>
+            </RadioGroup>
+          </FormControl>
+          <div class="h-5 w-full">
+            <FormMessage />
+          </div>
+        </FormItem>
+      </FormField>
 
       <FormField v-slot="{ componentField }" name="obs">
         <FormItem>

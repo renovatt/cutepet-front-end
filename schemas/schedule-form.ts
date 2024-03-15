@@ -8,6 +8,7 @@ export const scheduleFormSchema = toTypedSchema(z.object({
   weight: z.string(),
   age: z.string(),
   sex: z.string(),
+  service: z.string(),
   time: z.string().min(1, 'Selecione um horário'),
   date: z.coerce.date({
     errorMap: () => {
