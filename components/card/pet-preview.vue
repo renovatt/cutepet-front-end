@@ -5,7 +5,7 @@ import { Dumbbell, Cat, Heart, PawPrint, CalendarDays, Download, Clock } from 'l
 
 <template>
   <section
-    class="relative flex w-full max-w-96 items-center justify-center rounded-lg border bg-secondary p-2 shadow md:w-96">
+    class="relative flex w-full max-w-96 items-center justify-center rounded-lg border p-2 shadow md:w-96">
     <Download class="absolute right-3 top-3 size-5 cursor-pointer text-primary/70 transition-all hover:text-primary" />
     <article class="flex flex-col items-start justify-center gap-5 p-2 md:w-full md:flex-row">
       <figure class="size-20 md:size-40">

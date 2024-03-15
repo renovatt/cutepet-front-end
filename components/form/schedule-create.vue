@@ -63,12 +63,12 @@ const onSubmit = handleSubmit((values) => {
         O pet é um:
       </Button>
 
-      <div v-if="chosenPet" class="flex size-16 flex-col items-center justify-center">
+      <div v-if="chosenPet" class="flex size-16 items-center justify-center gap-2">
         <Cat class="text-primary " />
         <p>Gato</p>
       </div>
 
-      <div v-else class="flex size-16 flex-col items-center justify-center">
+      <div v-else class="flex size-16 items-center justify-center gap-2">
         <Dog class="text-primary " />
         <p>Cão</p>
       </div>

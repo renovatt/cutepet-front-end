@@ -38,12 +38,12 @@ const handleError = () => {
             <span class="text-start text-xs font-semibold">{{ lifeSpan }}</span>
           </span>
 
-          <span v-if="temperament?.length" class="flex flex-col items-start justify-center gap-2 text-primary">
+          <span v-if="temperament?.length" class="flex flex-col items-start justify-center text-primary">
             <span class="text-xs font-bold text-muted-foreground">Temperamentos:</span>
             <span class="text-start text-xs font-semibold">{{ temperament }}</span>
           </span>
 
-          <span v-else class="flex flex-col items-start justify-center gap-2 text-primary">
+          <span v-else class="flex flex-col items-start justify-center text-primary">
             <span class="text-xs font-bold text-muted-foreground">Temperamentos:</span>
             <span class="text-start text-xs font-semibold">Sem informações</span>
           </span>

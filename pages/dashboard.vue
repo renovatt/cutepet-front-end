@@ -36,7 +36,7 @@ const { isOpen } = useToggle()
     class="flex min-h-screen w-full flex-col items-center justify-between gap-10 space-y-4 overflow-y-auto p-4 scrollbar-hide lg:flex-row lg:justify-center lg:space-y-0">
     <the-modal :is-open="isOpen" @close="isOpen = !isOpen">
       <template #title>
-        Agendamento
+        Agendar
       </template>
 
       <template #content>
