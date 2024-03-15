@@ -36,6 +36,12 @@ const handleLogout = () => {
         </NuxtLink>
 
         <the-nav-dropdown :sidebar="isOpen" />
+
+        <NuxtLink to="/settings"
+          :class="isActive === '/settings' ? 'bg-secondary-foreground/5 text-primary' : 'text-muted-foreground'"
+          class="flex w-full items-center justify-center gap-5 rounded-lg p-2 transition-all hover:bg-secondary-foreground/5 md:hidden">
+          <Settings :class="isActive === '/settings' ? 'text-primary' : 'text-muted-foreground'" />
+        </Nuxtlink>
       </ul>
     </nav>
 
