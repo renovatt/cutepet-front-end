@@ -63,8 +63,7 @@ const onSubmit = handleSubmit((values) => {
         </FormItem>
       </FormField>
 
-      <!-- cat breeds -->
-      <FormField v-if="chosenPet === 'cat'" name="breed">
+      <FormField name="breed">
         <FormItem class="flex h-20 w-full flex-col md:w-[200px]">
           <FormLabel>Raça</FormLabel>
           <Popover>
@@ -76,9 +75,12 @@ const onSubmit = handleSubmit((values) => {
                     <AvatarImage :src="values?.breed?.image?.url ?? ''" :alt="values.breed?.name" />
                     <AvatarFallback>P</AvatarFallback>
                   </Avatar>
-                  <span class="w-20 truncate">
-                    {{ values.breed?.id ? cats?.find((breed) =>
-    breed.id === values.breed?.id)?.name : 'Escholha a raça' }}
+                  <span v-if="chosenPet === 'cat'" class="w-20 truncate">
+                    {{ values.breed?.id ? cats?.find((breed) => breed.id === values.breed?.id)?.name : 'Escholha a raça' }}
+                  </span>
+
+                  <span v-else class="w-20 truncate">
+                    {{ values.breed?.id ? dogs?.find((breed) => breed.id === values.breed?.id)?.name : 'Escholha a raça' }}
                   </span>
                   <ChevronsUpDown class="ml-2 size-4 shrink-0 opacity-50" />
                 </Button>
@@ -86,10 +88,11 @@ const onSubmit = handleSubmit((values) => {
             </PopoverTrigger>
             <PopoverContent class="w-44 p-0">
               <Command>
-                <CommandInput placeholder="Siamês" />
+                <CommandInput v-if="chosenPet === 'cat'" placeholder="Siamês" />
+                <CommandInput v-else placeholder="Pastor Alemão" />
                 <CommandEmpty>Nada encontrado.</CommandEmpty>
                 <CommandList>
-                  <CommandGroup>
+                  <CommandGroup v-if="chosenPet === 'cat'">
                     <CommandItem v-for="breed in cats" :key="breed.id" :value="breed.id"
                       @select="() => { setValues({ breed }) }">
                       <Avatar class="mr-2 size-5">
@@ -101,44 +104,9 @@ const onSubmit = handleSubmit((values) => {
                         :class="cn('ml-auto h-4 w-4', breed.id === (values.breed?.id ?? '') ? 'opacity-100' : 'opacity-0')" />
                     </CommandItem>
                   </CommandGroup>
-                </CommandList>
-              </Command>
-            </PopoverContent>
-          </Popover>
-          <div class="h-5 w-full">
-            <FormMessage />
-          </div>
-        </FormItem>
-      </FormField>
 
-      <!-- dog breeds -->
-      <FormField v-else name="breed">
-        <FormItem class="flex h-20 w-full flex-col md:w-[200px]">
-          <FormLabel>Raça</FormLabel>
-          <Popover>
-            <PopoverTrigger as-child>
-              <FormControl>
-                <Button variant="outline" role="combobox" aria-expanded="open" aria-label="Escholha a raça"
-                  :class="cn('md:w-[200px] justify-between capitalize', !values.breed?.id && 'text-muted-foreground')">
-                  <Avatar class="mr-2 size-5">
-                    <AvatarImage :src="values?.breed?.image?.url ?? ''" :alt="values.breed?.name" />
-                    <AvatarFallback>P</AvatarFallback>
-                  </Avatar>
-                  <span class="w-20 truncate">
-                    {{ values.breed?.id ? dogs.find((breed) => breed.id === values.breed?.id)?.name : 'Escholha a raça'
-                    }}
-                  </span>
-                  <ChevronsUpDown class="ml-2 size-4 shrink-0 opacity-50" />
-                </Button>
-              </FormControl>
-            </PopoverTrigger>
-            <PopoverContent class="w-44 p-0">
-              <Command>
-                <CommandInput placeholder="Pastor Alemão" />
-                <CommandEmpty>Nada encontrado.</CommandEmpty>
-                <CommandList>
-                  <CommandGroup>
-                    <CommandItem v-for="breed in dogs " :key="breed.id" :value="breed.id"
+                  <CommandGroup v-else>
+                    <CommandItem v-for="breed in dogs" :key="breed.id" :value="breed.id"
                       @select="() => { setValues({ breed }) }">
                       <Avatar class="mr-2 size-5">
                         <AvatarImage v-if="breed?.image?.url" :src="breed?.image?.url" :alt="breed.name" />
