@@ -16,11 +16,14 @@ const catViralata = {
 }
 
 const dogViralata = {
-  id: 0,
+  id: 'viralata',
   name: 'Viralata',
   life_span: '',
   temperament: '',
   reference_image_id: '',
+  image: {
+    url: '',
+  },
 }
 
 export const usePets = () => {

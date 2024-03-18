@@ -13,7 +13,7 @@ const defaultValues = {
   pet: 'dog' as 'dog' | 'cat',
   petname: 'Jujuba',
   breed: {
-    id: '6',
+    id: 'Akita',
     name: 'Akita',
     reference_image_id: 'BFRYBufpm',
     image: {
@@ -121,14 +121,12 @@ const onSubmit = handleSubmit((values) => {
                 <Button variant="outline" role="combobox" aria-expanded="open" aria-label="Escholha a raça"
                   :class="cn('md:w-[200px] justify-between capitalize', !values.breed?.id && 'text-muted-foreground')">
                   <Avatar class="mr-2 size-5">
-                    <AvatarImage
-                      :src="`https://cdn2.thedogapi.com/images/${values?.breed?.reference_image_id}.jpg` ?? ''"
-                      :alt="values.breed?.name" />
+                    <AvatarImage :src="values?.breed?.image?.url ?? ''" :alt="values.breed?.name" />
                     <AvatarFallback>P</AvatarFallback>
                   </Avatar>
                   <span class="w-20 truncate">
-                    {{ values.breed?.name ? dogs.find((breed) =>
-    breed.name === values.breed?.name)?.name : 'Escholha a raça' }}
+                    {{ values.breed?.id ? dogs.find((breed) => breed.id === values.breed?.id)?.name : 'Escholha a raça'
+                    }}
                   </span>
                   <ChevronsUpDown class="ml-2 size-4 shrink-0 opacity-50" />
                 </Button>
@@ -140,27 +138,15 @@ const onSubmit = handleSubmit((values) => {
                 <CommandEmpty>Nada encontrado.</CommandEmpty>
                 <CommandList>
                   <CommandGroup>
-                    <CommandItem v-for="breed in dogs" :key="breed.id" :value="breed.name" @select="() => {
-    setValues({
-      breed: {
-        ...breed,
-        id: breed.name,
-        image: {
-          url: `https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`
-        },
-        reference_image_id: breed.reference_image_id
-      }
-    })
-  }">
+                    <CommandItem v-for="breed in dogs " :key="breed.id" :value="breed.id"
+                      @select="() => { setValues({ breed }) }">
                       <Avatar class="mr-2 size-5">
-                        <AvatarImage v-if="breed?.reference_image_id"
-                          :src="`https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`"
-                          :alt="breed.name" />
+                        <AvatarImage v-if="breed?.image?.url" :src="breed?.image?.url" :alt="breed.name" />
                         <AvatarFallback>P</AvatarFallback>
                       </Avatar>
                       {{ breed.name }}
                       <Check
-                        :class="cn('ml-auto h-4 w-4', breed.name === (values.breed?.name ?? '') ? 'opacity-100' : 'opacity-0')" />
+                        :class="cn('ml-auto h-4 w-4', breed.id === (values.breed?.id ?? '') ? 'opacity-100' : 'opacity-0')" />
                     </CommandItem>
                   </CommandGroup>
                 </CommandList>
@@ -180,7 +166,7 @@ const onSubmit = handleSubmit((values) => {
           <FormLabel>Idade</FormLabel>
           <FormControl>
             <RadioGroup class="flex flex-col space-y-1" v-bind="componentField">
-              <FormItem v-for="option in age" :key="option.value" class="flex items-center gap-x-3 space-y-0">
+              <FormItem v-for=" option in age " :key="option.value" class="flex items-center gap-x-3 space-y-0">
                 <FormControl>
                   <RadioGroupItem :value="option.value" />
                 </FormControl>
@@ -201,7 +187,7 @@ const onSubmit = handleSubmit((values) => {
           <FormLabel>Peso</FormLabel>
           <FormControl>
             <RadioGroup class="flex flex-col space-y-1" v-bind="componentField">
-              <FormItem v-for="option in weight" :key="option.value" class="flex items-center gap-x-3 space-y-0">
+              <FormItem v-for=" option in weight " :key="option.value" class="flex items-center gap-x-3 space-y-0">
                 <FormControl>
                   <RadioGroupItem :value="option.value" />
                 </FormControl>
@@ -222,7 +208,7 @@ const onSubmit = handleSubmit((values) => {
           <FormLabel>Sexo</FormLabel>
           <FormControl>
             <RadioGroup class="flex flex-col space-y-1" v-bind="componentField">
-              <FormItem v-for="option in sex" :key="option.value" class="flex items-center gap-x-3 space-y-0">
+              <FormItem v-for=" option in sex " :key="option.value" class="flex items-center gap-x-3 space-y-0">
                 <FormControl>
                   <RadioGroupItem :value="option.value" />
                 </FormControl>
@@ -274,7 +260,7 @@ const onSubmit = handleSubmit((values) => {
             </FormControl>
             <SelectContent>
               <SelectGroup>
-                <SelectItem v-for="option in times" :key="option" :value="option">
+                <SelectItem v-for=" option in times " :key="option" :value="option">
                   {{ option }}
                 </SelectItem>
               </SelectGroup>
@@ -292,7 +278,7 @@ const onSubmit = handleSubmit((values) => {
         <FormLabel>Atendimento</FormLabel>
         <FormControl>
           <RadioGroup class="flex flex-col gap-2 space-y-1 md:flex-row md:gap-10" v-bind="componentField">
-            <FormItem v-for="option in services" :key="option.value" class="flex items-center gap-x-3 space-y-0">
+            <FormItem v-for=" option in services " :key="option.value" class="flex items-center gap-x-3 space-y-0">
               <FormControl>
                 <RadioGroupItem :value="option.value" />
               </FormControl>
