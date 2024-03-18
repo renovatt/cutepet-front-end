@@ -27,7 +27,12 @@ const handleLogout = () => {
       </h2>
 
       <div class="w-full">
-        <form-auth-register-update />
+        <ClientOnly>
+          <form-auth-register-update />
+          <template #placeholder>
+            <div>Buscando dados...</div>
+          </template>
+        </ClientOnly>
       </div>
     </article>
   </section>
