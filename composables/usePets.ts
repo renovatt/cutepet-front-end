@@ -7,7 +7,7 @@ const catViralata = {
   energy_level: 0,
   intelligence: 0,
   image: {
-    url: '',
+    url: 'https://cdn.shopify.com/s/files/1/0500/8965/6473/files/cat-gdede5f720_1920_480x480.jpg?v=1663248430',
     height: 0,
     width: 0,
     id: ''
@@ -22,7 +22,7 @@ const dogViralata = {
   temperament: '',
   reference_image_id: '',
   image: {
-    url: '',
+    url: 'https://i.pinimg.com/originals/ef/0e/ab/ef0eaba2dbc1b61d8770796f758e41c7.jpg',
   },
 }
 

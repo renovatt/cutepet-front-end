@@ -14,7 +14,7 @@ export const weight = [
 
 export const sex = [
   { label: 'Macho', value: 'macho' },
-  { label: 'Fêmea', value: 'femea' }
+  { label: 'Fêmea', value: 'fêmea' }
 ]
 
 export const services = [

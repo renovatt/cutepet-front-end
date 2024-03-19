@@ -19,7 +19,7 @@ export const useDogBreeds = () => {
     lazy: false,
     server: false,
     query: {
-      limit: 100
+      limit: 70
     },
     transform: (breeds: DogBreed[]) => {
       return breeds.map((breed: DogBreed) => ({
