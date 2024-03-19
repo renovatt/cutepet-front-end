@@ -17,6 +17,7 @@ const cardData = [
 ]
 
 const { isOpen } = useToggle()
+const { schedules } = useSchedules()
 </script>
 
 <template>
@@ -30,7 +31,7 @@ const { isOpen } = useToggle()
       <template #content>
         <section class="mt-2 flex flex-col items-start justify-around gap-4 rounded-lg p-4 md:flex-row">
           <form-schedule-create />
-          <card-pet-preview />
+          <!-- <card-pet-preview /> -->
         </section>
       </template>
     </the-modal>
@@ -48,16 +49,18 @@ const { isOpen } = useToggle()
         <Plus class="size-6" /> Novo Agendamento
       </Button>
 
-     <div class="size-full">
-      <calendar-picker />
-     </div>
+      <div class="size-full">
+        <calendar-picker />
+      </div>
     </article>
 
-    <article class="flex size-full max-w-7xl flex-col items-center justify-center p-1">
-      <section
-        class="flex size-full flex-wrap items-start justify-center gap-4 overflow-y-auto pb-14 scrollbar-hide md:justify-start md:pb-4">
-        <card-pet-scheduled v-for="n in 18" :key="n" name="Jujuba" time="10:00h" type="cat" />
-        <card-pet-scheduled v-for="n in 28" :key="n" name="Jubileu" time="13:00h" type="dog" />
+    <article class="flex size-full max-w-7xl flex-col items-center justify-start p-1">
+      <section v-if="schedules?.length"
+        class="flex flex-wrap items-start justify-center gap-4 overflow-y-auto pb-14 scrollbar-hide md:justify-start md:pb-4">
+        <card-pet-scheduled v-for="schedule in schedules" :key="schedule.id" :schedule="schedule" />
+      </section>
+      <section v-else class="mb-14 flex w-full items-start justify-center md:mb-0 md:justify-start">
+        <span class="text-muted-foreground">Ainda náo há agendamentos</span>
       </section>
     </article>
   </section>

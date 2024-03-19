@@ -22,7 +22,7 @@ const defaultValues = {
     name: 'Viralata',
     reference_image_id: '',
     image: {
-      url: ''
+      url: 'https://i.pinimg.com/originals/ef/0e/ab/ef0eaba2dbc1b61d8770796f758e41c7.jpg'
     }
   },
   pet: 'dog' as 'dog' | 'cat',
@@ -42,9 +42,14 @@ watch(chosenPet, () => {
   setValues({ breed: defaultValues.breed })
 
   if (chosenPet.value) {
-    setValues({ pet: 'cat' })
-  } else {
-    setValues({ pet: 'dog' })
+    setValues({
+      pet: 'cat',
+      breed: {
+        image: {
+          url: 'https://cdn.shopify.com/s/files/1/0500/8965/6473/files/cat-gdede5f720_1920_480x480.jpg?v=1663248430',
+        },
+      }
+    })
   }
 })
 
@@ -102,11 +107,13 @@ const onSubmit = handleSubmit((values) => {
                       <AvatarFallback>P</AvatarFallback>
                     </Avatar>
                     <span v-if="chosenPet" class="w-20 truncate">
-                      {{ values.breed?.id ? cats?.find((breed) => breed.id === values.breed?.id)?.name : 'Escholha a raça' }}
+                      {{ values.breed?.id ? cats?.find((breed) =>
+        breed.id === values.breed?.id)?.name : 'Escholha a raça' }}
                     </span>
 
                     <span v-else class="w-20 truncate">
-                      {{ values.breed?.id ? dogs?.find((breed) => breed.id === values.breed?.id)?.name : 'Escholha a raça' }}
+                      {{ values.breed?.id ? dogs?.find((breed) =>
+        breed.id === values.breed?.id)?.name : 'Escholha a raça' }}
                     </span>
                     <ChevronsUpDown class="ml-2 size-4 shrink-0 opacity-50" />
                   </Button>
@@ -305,4 +312,4 @@ const onSubmit = handleSubmit((values) => {
       </Button>
     </form>
   </section>
-</template>~/constants/inputs
+</template>

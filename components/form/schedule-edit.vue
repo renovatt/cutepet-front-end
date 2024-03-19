@@ -9,32 +9,14 @@ import { cn } from '~/lib/utils'
 import { scheduleFormSchema } from '~/schemas/schedule-form'
 import { age, sex, weight, times, services } from '~/constants/inputs'
 
-const defaultValues = {
-  pet: 'dog' as 'dog' | 'cat',
-  petname: 'Jujuba',
-  breed: {
-    id: 'Akita',
-    name: 'Akita',
-    reference_image_id: 'BFRYBufpm',
-    image: {
-      url: 'https://cdn2.thedogapi.com/images/BFRYBufpm.jpg',
-    },
-  },
-  age: '1a-2a',
-  weight: '20kg-40kg',
-  sex: 'macho',
-  service: 'bath-grooming',
-  date: new Date('2024-03-30T15:35:39.078Z'),
-  time: '10:00',
-  obs: 'Cuidado, ele morde quando esta com fome!',
-}
+const { schedule } = defineProps<{ schedule: Schedule }>()
 
 const { handleSubmit, setValues, values } = useForm({
   validationSchema: scheduleFormSchema,
-  initialValues: defaultValues
+  initialValues: schedule
 })
 
-const chosenPet = ref(defaultValues.pet)
+const chosenPet = ref(schedule.pet)
 
 const { cats, dogs } = usePets()
 
@@ -45,7 +27,6 @@ const onSubmit = handleSubmit((values) => {
     description: h('pre', { class: 'mt-2 w-[340px] rounded-md bg-slate-950 p-4' }, h('code', { class: 'text-white' }, JSON.stringify(values, null, 2)))
   })
 })
-
 </script>
 
 <template>
@@ -72,15 +53,17 @@ const onSubmit = handleSubmit((values) => {
                 <Button variant="outline" role="combobox" aria-expanded="open" aria-label="Escholha a raça"
                   :class="cn('md:w-[200px] justify-between capitalize', !values.breed?.id && 'text-muted-foreground')">
                   <Avatar class="mr-2 size-5">
-                    <AvatarImage :src="values?.breed?.image?.url ?? ''" :alt="values.breed?.name" />
+                    <AvatarImage :src="values.breed?.image?.url ?? ''" :alt="values.breed?.name" />
                     <AvatarFallback>P</AvatarFallback>
                   </Avatar>
                   <span v-if="chosenPet === 'cat'" class="w-20 truncate">
-                    {{ values.breed?.id ? cats?.find((breed) => breed.id === values.breed?.id)?.name : 'Escholha a raça' }}
+                    {{ values.breed?.id ? cats?.find((breed) => breed.id === values.breed?.id)?.name : 'Escholha a raça'
+                    }}
                   </span>
 
                   <span v-else class="w-20 truncate">
-                    {{ values.breed?.id ? dogs?.find((breed) => breed.id === values.breed?.id)?.name : 'Escholha a raça' }}
+                    {{ values.breed?.id ? dogs?.find((breed) => breed.id === values.breed?.id)?.name : 'Escholha a raça'
+                    }}
                   </span>
                   <ChevronsUpDown class="ml-2 size-4 shrink-0 opacity-50" />
                 </Button>
@@ -96,7 +79,7 @@ const onSubmit = handleSubmit((values) => {
                     <CommandItem v-for="breed in cats" :key="breed.id" :value="breed.id"
                       @select="() => { setValues({ breed }) }">
                       <Avatar class="mr-2 size-5">
-                        <AvatarImage v-if="breed?.image?.url" :src="breed?.image?.url" :alt="breed.name" />
+                        <AvatarImage v-if="breed.image?.url" :src="breed?.image?.url" :alt="breed.name" />
                         <AvatarFallback>P</AvatarFallback>
                       </Avatar>
                       {{ breed.name }}
@@ -109,7 +92,7 @@ const onSubmit = handleSubmit((values) => {
                     <CommandItem v-for="breed in dogs" :key="breed.id" :value="breed.id"
                       @select="() => { setValues({ breed }) }">
                       <Avatar class="mr-2 size-5">
-                        <AvatarImage v-if="breed?.image?.url" :src="breed?.image?.url" :alt="breed.name" />
+                        <AvatarImage v-if="breed.image?.url" :src="breed.image?.url" :alt="breed.name" />
                         <AvatarFallback>P</AvatarFallback>
                       </Avatar>
                       {{ breed.name }}
@@ -278,4 +261,4 @@ const onSubmit = handleSubmit((values) => {
       Salvar
     </Button>
   </form>
-</template>~/constants/inputs
+</template>

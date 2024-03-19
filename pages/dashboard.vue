@@ -42,7 +42,7 @@ const { isOpen } = useToggle()
       <template #content>
         <section class="mt-2 flex flex-col items-start justify-around gap-4 rounded-lg p-4 md:flex-row">
           <form-schedule-create />
-          <card-pet-preview />
+          <!-- <card-pet-preview /> -->
         </section>
       </template>
     </the-modal>

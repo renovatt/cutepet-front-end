@@ -1,15 +1,25 @@
 <script setup lang="ts">
 import { Cat, Dog, Info, Clock } from 'lucide-vue-next'
 
-type PetProps = {
-  type: 'dog' | 'cat'
-  name: string
-  time: string
+const scheduleSelected = ref<Schedule>()
+const { schedule } = defineProps<{ schedule: Schedule }>()
+
+const { isOpen } = useToggle()
+const { schedules } = useSchedules()
+
+const imageUrl = ref(schedule.breed.image.url)
+
+const handleError = () => {
+  imageUrl.value = 'https://http.cat/images/404.jpg'
 }
 
-const props = defineProps<PetProps>()
-const { isOpen } = useToggle()
-
+const handleSelectSchedule = (id: string) => {
+  const schedule = schedules.value?.find(schedule => schedule.id === id)
+  if (schedule) {
+    scheduleSelected.value = schedule
+    isOpen.value = true
+  }
+}
 </script>
 
 <template>
@@ -20,35 +30,33 @@ const { isOpen } = useToggle()
 
     <template #content>
       <section class="mt-2 flex flex-col items-start justify-around gap-4 rounded-lg p-4 md:flex-row">
-        <form-schedule-edit />
-        <card-pet-preview />
+        <form-schedule-edit v-if="scheduleSelected" :schedule="scheduleSelected" />
+        <card-pet-preview v-if="scheduleSelected" :schedule="scheduleSelected" />
       </section>
     </template>
   </the-modal>
 
   <section class="relative flex w-48 items-center justify-between rounded-lg border shadow">
     <Info class=" absolute right-1 top-1 size-5 cursor-pointer text-primary/70 transition-all hover:text-primary"
-      @click="isOpen = !isOpen" />
+      @click="handleSelectSchedule(schedule.id)" />
     <article class="flex w-full items-center justify-around gap-2 p-2 py-4 lg:justify-center">
 
       <figure class="grid size-20 place-items-center rounded-lg bg-primary-foreground">
-        <img v-if="props.type === 'cat'" src="https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg"
-          class="size-20 rounded-lg bg-primary object-cover">
-        <img v-else src="https://cdn2.thedogapi.com/images/S17ZilqNm_1280.jpg"
-          class="size-20 rounded-lg bg-primary object-cover">
+        <img :src="imageUrl" :alt="schedule.breed.name"
+          class="size-20 rounded-lg bg-primary object-cover" @error="handleError">
       </figure>
 
       <section class="flex size-20 flex-col items-center justify-center gap-4">
         <section class="flex w-full flex-col items-start justify-between gap-2">
           <span class="flex items-center justify-center gap-2 text-muted-foreground">
-            <Cat v-if="props.type === 'cat'" class="size-5 text-primary" />
+            <Cat v-if="schedule.pet === 'cat'" class="size-5 text-primary" />
             <Dog v-else class="size-5 text-primary" />
-            <p class="text-xs font-bold text-muted-foreground">{{ props.name }}</p>
+            <p class="text-xs font-bold capitalize text-muted-foreground">{{ schedule.petname }}</p>
           </span>
 
           <span class="flex items-center justify-center gap-2 text-muted-foreground">
             <Clock class="size-5 text-primary" />
-            <p class="text-xs font-bold text-muted-foreground">{{ props.time }}</p>
+            <p class="text-xs font-bold text-muted-foreground">{{ schedule.time }}h</p>
           </span>
         </section>
       </section>
