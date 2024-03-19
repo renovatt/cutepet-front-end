@@ -18,6 +18,31 @@ const cardData = [
 
 const { isOpen } = useToggle()
 const { schedules } = useSchedules()
+const { selectedDate } = useDatePicker
+
+const filter = ref(false)
+const filteredSchedules = ref<Schedule[]>([])
+
+watchEffect(() => {
+  const dateFilter = selectedDate.value
+  filteredSchedules.value = schedules.value?.filter(schedule =>
+    !dateFilter || new Date(schedule.date).toISOString().split('T')[0] === dateFilter
+  ) || []
+
+  if (dateFilter) {
+    filter.value = true
+  }
+})
+
+const handleReset = () => {
+  selectedDate.value = ''
+  filter.value = false
+}
+
+onMounted(() => {
+  handleReset()
+})
+
 </script>
 
 <template>
@@ -45,8 +70,13 @@ const { schedules } = useSchedules()
           </template>
         </card-schedules-data>
       </section>
+
       <Button class="w-full" @click="isOpen = !isOpen">
         <Plus class="size-6" /> Novo Agendamento
+      </Button>
+
+      <Button v-if="filter" class="w-full" @click="handleReset">
+        Limpar
       </Button>
 
       <div class="size-full">
@@ -54,13 +84,13 @@ const { schedules } = useSchedules()
       </div>
     </article>
 
-    <article class="flex size-full max-w-7xl flex-col items-center justify-start p-1">
-      <section v-if="schedules?.length"
+    <article class="flex size-full max-w-7xl flex-col items-start justify-start p-1">
+      <section v-if="filteredSchedules?.length"
         class="flex flex-wrap items-start justify-center gap-4 overflow-y-auto pb-14 scrollbar-hide md:justify-start md:pb-4">
-        <card-pet-scheduled v-for="schedule in schedules" :key="schedule.id" :schedule="schedule" />
+        <card-pet-scheduled v-for="schedule in filteredSchedules" :key="schedule.id" :schedule="schedule" />
       </section>
-      <section v-else class="mb-14 flex w-full items-start justify-center md:mb-0 md:justify-start">
-        <span class="text-muted-foreground">Ainda náo há agendamentos</span>
+      <section v-else class="mb-14 flex size-full w-full items-center justify-center md:mb-0 md:justify-center">
+        <span class="text-muted-foreground">Ainda não há agendamentos</span>
       </section>
     </article>
   </section>

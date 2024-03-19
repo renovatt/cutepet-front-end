@@ -1,28 +1,13 @@
-type DateType = 'edit' | 'create'
-
 export const useDatePickerStore = () => {
-  const createdDate = ref('')
-  const updatedDate = ref('')
+  const selectedDate = ref('')
 
-  const handleSaveDatePicker = (date: Date, type?: DateType) => {
-    type = type || 'create'
-    type === 'edit' ? handleUpdateDate(date) : handleCreateDate(date)
-  }
-
-  const handleCreateDate = (date: Date) => {
-    createdDate.value = new Date(date).toISOString()
-  }
-
-  const handleUpdateDate = (date: Date) => {
-    updatedDate.value = new Date(date).toISOString()
+  const handleSaveDate = (date: Date) => {
+    selectedDate.value = new Date(date).toISOString().split('T')[0]
   }
 
   return {
-    updatedDate,
-    createdDate,
-    handleCreateDate,
-    handleUpdateDate,
-    handleSaveDatePicker
+    selectedDate,
+    handleSaveDatePicker: handleSaveDate,
   }
 }
 
