@@ -16,7 +16,8 @@ const date = computed(() => new Date(schedule.date)
     <Download class="absolute right-3 top-3 size-5 cursor-pointer text-primary/70 transition-all hover:text-primary" />
     <article class="flex flex-col items-start justify-center gap-5 p-2 md:w-full md:flex-row">
       <figure class="size-20 md:size-40">
-        <img :src="schedule.breed.image.url" class="size-20 rounded-lg object-cover md:size-40">
+        <the-image-skeleton class="size-20 rounded-lg object-cover md:size-40" :src="schedule.breed.image.url"
+          :alt="schedule.breed.name" />
       </figure>
 
       <section class="flex w-40 flex-col items-center justify-between gap-4">

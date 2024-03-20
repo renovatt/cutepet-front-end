@@ -6,16 +6,10 @@ const {
   name,
   life_span,
   temperament,
-  reference_image_id
+  image,
 } = defineProps<Partial<DogBreed>>()
 
 const lifeSpan = computed(() => life_span?.replace('years', 'anos') ?? '')
-
-const imageUrl = ref(`https://cdn2.thedogapi.com/images/${reference_image_id}.jpg`)
-
-const handleError = () => {
-  imageUrl.value = `https://cdn2.thedogapi.com/images/${reference_image_id}.png`
-}
 
 </script>
 
@@ -23,7 +17,7 @@ const handleError = () => {
   <section class="flex w-full max-w-96 items-start justify-center rounded-lg border p-2 shadow">
     <article class="flex flex-col items-center justify-start gap-4 p-2 md:w-full md:flex-row md:items-start">
       <figure class="size-32">
-        <img :src="imageUrl" :alt="name" class="size-32 rounded-lg object-cover" @error="handleError">
+        <the-image-skeleton class="size-32 rounded-lg object-cover" :src="image?.url" :alt="name" />
       </figure>
 
       <section class="flex w-40 flex-col items-center justify-between gap-4">
@@ -34,7 +28,7 @@ const handleError = () => {
           </span>
 
           <span class="flex items-center justify-center gap-2 text-primary">
-            <span class="text-xs font-bold text-muted-foreground">Vida útil:</span>
+            <span class="text-xs font-bold text-muted-foreground">Est. de Vida:</span>
             <span class="text-start text-xs font-semibold">{{ lifeSpan }}</span>
           </span>
 

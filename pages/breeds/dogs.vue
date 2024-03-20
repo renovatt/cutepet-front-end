@@ -10,7 +10,7 @@ const { breeds: dogs, error, pending } = useDogBreeds()
     <article v-if="!pending"
       class="grid gap-4 overflow-y-auto pb-16 scrollbar-hide md:grid-cols-2 md:pb-0 xl:grid-cols-3">
       <card-breed-dog v-for="breed in dogs" :key="breed.id" :name="breed.name" :life_span="breed.life_span"
-        :reference_image_id="breed.reference_image_id" :temperament="breed.temperament" />
+        :image="breed.image" :temperament="breed.temperament" />
     </article>
 
     <the-loader v-else>

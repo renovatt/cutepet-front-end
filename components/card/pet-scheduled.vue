@@ -7,12 +7,6 @@ const { schedule } = defineProps<{ schedule: Schedule }>()
 const { isOpen } = useToggle()
 const { schedules } = useSchedules()
 
-const imageUrl = ref(schedule.breed.image.url)
-
-const handleError = () => {
-  imageUrl.value = 'https://http.cat/images/404.jpg'
-}
-
 const handleSelectSchedule = (id: string) => {
   const schedule = schedules.value?.find(schedule => schedule.id === id)
   if (schedule) {
@@ -42,8 +36,8 @@ const handleSelectSchedule = (id: string) => {
     <article class="flex w-full items-center justify-around gap-2 p-2 py-4 lg:justify-center">
 
       <figure class="grid size-20 place-items-center rounded-lg bg-primary-foreground">
-        <img :src="imageUrl" :alt="schedule.breed.name"
-          class="size-20 rounded-lg bg-primary object-cover" @error="handleError">
+        <the-image-skeleton class="size-20 rounded-lg bg-primary object-cover" :src="schedule.breed.image.url"
+          :alt="schedule.breed.name" />
       </figure>
 
       <section class="flex size-20 flex-col items-center justify-center gap-4">

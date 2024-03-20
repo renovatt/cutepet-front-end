@@ -18,8 +18,7 @@ const {
   <section class="flex w-full max-w-96 items-center justify-center rounded-lg border p-2 shadow">
     <article class="flex flex-col items-center justify-start gap-4 p-2 md:w-full md:flex-row">
       <figure class="size-32">
-        <img v-if="image?.url" :src="image?.url" :alt="name" class="size-32 rounded-lg object-cover">
-        <img v-else src="https://http.cat/images/404.jpg" :alt="name" class="size-32 rounded-lg object-cover">
+        <the-image-skeleton class="size-32 rounded-lg object-cover" :src="image?.url" :alt="name" />
       </figure>
 
       <section class="flex w-40 flex-col items-center justify-between gap-4">
