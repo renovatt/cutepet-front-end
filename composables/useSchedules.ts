@@ -1,4 +1,4 @@
-const url = 'https://run.mocky.io/v3/346a35f7-3ad6-4e50-bb85-9c643a19ed13'
+const url = 'https://run.mocky.io/v3/d8b09663-ba1c-4bc8-8163-d1ddc05dbe41'
 
 export type Schedule = {
   id: string;
