@@ -1,27 +1,13 @@
 <script setup lang="ts">
-import { Plus, ShowerHead, Stethoscope } from 'lucide-vue-next'
-
-const cardData = [
-  {
-    title: 'Banho e Tosa',
-    value: '22',
-    subtitle: 'Agendamentos',
-    icon: ShowerHead
-  },
-  {
-    title: 'Clínica',
-    value: '4',
-    subtitle: 'Agendamentos',
-    icon: Stethoscope
-  }
-]
-
-const { isOpen } = useToggle()
-const { schedules } = useSchedules()
-const { selectedDate } = useDatePicker
+import { Plus } from 'lucide-vue-next'
 
 const filter = ref(false)
 const filteredSchedules = ref<Schedule[]>([])
+
+const { isOpen } = useToggle()
+const { schedules } = useSchedules()
+const { lastTwoCards } = useCardsData()
+const { selectedDate } = useDatePicker
 
 watchEffect(() => {
   const dateFilter = selectedDate.value
@@ -63,7 +49,7 @@ onMounted(() => {
 
     <article class="flex w-full flex-col items-center justify-start space-y-10 px-4 lg:h-full lg:max-w-96">
       <section class="flex w-full items-center justify-between gap-8 py-2">
-        <card-schedules-data v-for="card in cardData" :key="card.title" :title="card.title" :subtitle="card.subtitle"
+        <card-schedules-data v-for="card in lastTwoCards" :key="card.title" :title="card.title" :subtitle="card.subtitle"
           :value="card.value">
           <template #icon>
             <component :is="card.icon" class="size-5 text-primary-foreground md:size-10" />

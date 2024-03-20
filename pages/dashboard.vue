@@ -1,34 +1,8 @@
 <script setup lang="ts">
-import { Clock, ShowerHead, Stethoscope, CalendarDays, Plus } from 'lucide-vue-next'
-
-const cardData = [
-  {
-    title: 'Hoje',
-    value: '3',
-    subtitle: 'Agendamentos',
-    icon: Clock
-  },
-  {
-    title: 'Visão Geral',
-    value: '26',
-    subtitle: 'Agendamentos',
-    icon: CalendarDays
-  },
-  {
-    title: 'Banho e Tosa',
-    value: '22',
-    subtitle: 'Agendamentos',
-    icon: ShowerHead
-  },
-  {
-    title: 'Clínica',
-    value: '4',
-    subtitle: 'Agendamentos',
-    icon: Stethoscope
-  }
-]
+import { Plus } from 'lucide-vue-next'
 
 const { isOpen } = useToggle()
+const { cards } = useCardsData()
 </script>
 
 <template>
@@ -48,8 +22,8 @@ const { isOpen } = useToggle()
     </the-modal>
 
     <article class="flex flex-col items-center justify-start space-y-10 px-4 lg:h-full lg:max-w-96">
-       <section class="flex flex-wrap items-center justify-between gap-8 py-2 lg:w-full">
-        <card-schedules-data v-for="card in cardData" :key="card.title" :title="card.title" :subtitle="card.subtitle"
+      <section class="flex flex-wrap items-center justify-between gap-8 py-2 lg:w-full">
+        <card-schedules-data v-for="card in cards" :key="card.title" :title="card.title" :subtitle="card.subtitle"
           :value="card.value">
           <template #icon>
             <component :is="card.icon" class="size-5 text-secondary md:size-10" />

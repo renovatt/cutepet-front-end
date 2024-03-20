@@ -2,7 +2,7 @@
 type CardProps = {
   title: string
   subtitle: string
-  value: string
+  value: number
 }
 
 const props = defineProps<CardProps>()
