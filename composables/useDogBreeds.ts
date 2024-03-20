@@ -23,7 +23,7 @@ export const useDogBreeds = () => {
     },
     transform: (breeds: DogBreed[]) => {
       return breeds.map((breed: DogBreed) => ({
-        id: breed.name,
+        id: translateWord(breedsDogTranslation, breed.name),
         name: translateWord(breedsDogTranslation, breed.name),
         life_span: breed.life_span,
         temperament: translateWord(temperamentsTranslation, breed.temperament ?? ''),
