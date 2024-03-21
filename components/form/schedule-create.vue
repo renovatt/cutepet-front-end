@@ -37,6 +37,15 @@ const { handleSubmit, setValues, values } = useForm({
 const chosenPet = ref(false)
 
 const { cats, dogs } = usePets()
+const { handleLimitSize } = useDogBreeds()
+
+const searchBreed = (name: string) => {
+  const breedExists = dogs.value.some(dog => dog.name === name)
+
+  if (!breedExists) {
+    handleLimitSize()
+  }
+}
 
 watch(chosenPet, () => {
   setValues({ breed: defaultValues.breed })
@@ -122,7 +131,7 @@ const onSubmit = handleSubmit((values) => {
               <PopoverContent class="w-44 p-0">
                 <Command>
                   <CommandInput v-if="chosenPet" placeholder="Siamês" />
-                  <CommandInput v-else placeholder="Pastor Alemão" />
+                  <CommandInput v-else placeholder="Pastor Alemão" @input="searchBreed" />
                   <CommandEmpty>Nada encontrado.</CommandEmpty>
                   <CommandList>
                     <CommandGroup v-if="chosenPet">

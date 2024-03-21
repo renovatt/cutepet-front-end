@@ -12,6 +12,8 @@ export interface DogBreed {
 
 export const useDogBreeds = () => {
   const config = useRuntimeConfig()
+  const limit = ref(70)
+
   const { data: breeds, error, pending, status } = useFetch(config.public.dogBaseURL, {
     headers: {
       'x-api-key': config.public.dogApiKey
@@ -19,7 +21,7 @@ export const useDogBreeds = () => {
     lazy: false,
     server: false,
     query: {
-      limit: 70
+      limit
     },
     transform: (breeds: DogBreed[]) => {
       return breeds.map((breed: DogBreed) => ({
@@ -35,10 +37,15 @@ export const useDogBreeds = () => {
     }
   })
 
+  const handleLimitSize = () => {
+    limit.value += 30
+  }
+
   return {
     breeds,
     error,
     pending,
-    status
+    status,
+    handleLimitSize
   }
 }
