@@ -30,7 +30,7 @@ const onSubmit = handleSubmit((values) => {
         <FormItem class="w-full">
           <FormLabel>Nome</FormLabel>
           <FormControl>
-            <Input type="text" placeholder="Digite seu nome" v-bind="componentField" />
+            <Input type="text" placeholder="Digite seu nome" v-bind="componentField" autocomplete />
           </FormControl>
           <div class="h-5 w-full">
             <FormMessage />
@@ -42,7 +42,7 @@ const onSubmit = handleSubmit((values) => {
         <FormItem class="w-full">
           <FormLabel>E-mail</FormLabel>
           <FormControl>
-            <Input type="email" placeholder="Digite seu e-mail" v-bind="componentField" />
+            <Input type="email" placeholder="Digite seu e-mail" v-bind="componentField" autocomplete />
           </FormControl>
           <div class="h-5 w-full">
             <FormMessage />
@@ -54,7 +54,7 @@ const onSubmit = handleSubmit((values) => {
         <FormItem class="w-full">
           <FormLabel>Nova senha</FormLabel>
           <FormControl>
-            <Input type="password" placeholder="Digite sua senha" v-bind="componentField" />
+            <Input type="password" placeholder="Digite sua senha" v-bind="componentField" autocomplete />
           </FormControl>
           <div class="h-5 w-full">
             <FormMessage />
@@ -66,7 +66,7 @@ const onSubmit = handleSubmit((values) => {
         <FormItem class="w-full">
           <FormLabel>Confirmar nova senha</FormLabel>
           <FormControl>
-            <Input type="password" placeholder="Digite sua senha" v-bind="componentField" />
+            <Input type="password" placeholder="Digite sua senha" v-bind="componentField" autocomplete />
           </FormControl>
           <div class="h-5 w-full">
             <FormMessage />

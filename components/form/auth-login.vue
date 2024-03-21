@@ -22,11 +22,11 @@ const onSubmit = handleSubmit((values) => {
 <template>
   <form class="w-full max-w-80" @submit="onSubmit">
     <div class="flex w-full flex-col items-center justify-between gap-2">
-      <FormField v-slot="{ componentField }" name="username">
+      <FormField v-slot="{ componentField }" name="email">
         <FormItem class="w-full">
-          <FormLabel>Nome</FormLabel>
+          <FormLabel>E-mail</FormLabel>
           <FormControl>
-            <Input type="text" placeholder="Digite seu nome" v-bind="componentField" />
+            <Input type="text" placeholder="Digite seu e-mail" v-bind="componentField" />
           </FormControl>
           <div class="h-5 w-full">
             <FormMessage />
@@ -38,7 +38,7 @@ const onSubmit = handleSubmit((values) => {
         <FormItem class="w-full">
           <FormLabel>Senha</FormLabel>
           <FormControl>
-            <Input type="password" placeholder="Digite sua senha" v-bind="componentField" />
+            <Input type="password" placeholder="Digite sua senha" v-bind="componentField" autocomplete />
           </FormControl>
           <div class="h-5 w-full">
             <FormMessage />

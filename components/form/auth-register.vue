@@ -50,7 +50,7 @@ const onSubmit = handleSubmit((values) => {
         <FormItem class="w-full">
           <FormLabel>Senha</FormLabel>
           <FormControl>
-            <Input type="password" placeholder="Digite sua senha" v-bind="componentField" />
+            <Input type="password" placeholder="Digite sua senha" v-bind="componentField" autocomplete />
           </FormControl>
           <div class="h-5 w-full">
             <FormMessage />
