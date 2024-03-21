@@ -10,6 +10,10 @@ export default defineNuxtConfig({
       dogApiKey: process.env.NUXT_DOG_API_KEY
     }
   },
+  app: {
+    pageTransition: { name: 'v', mode: 'out-in' },
+    // layoutTransition: { name: 'layout', mode: 'out-in' }
+  },
   modules: [
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
