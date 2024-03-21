@@ -1,19 +1,32 @@
+<!-- eslint-disable space-before-function-paren -->
 <script setup lang="ts">
 import { Dog } from 'lucide-vue-next'
+import { useInfiniteScroll } from '@vueuse/core'
 
-const { breeds: dogs, error, pending } = useDogBreeds()
+const { getDogs, defautPage } = useFetchDogs()
+
+const breedsLimit = ref(15)
+const el = ref<HTMLElement | null>(null)
+const dogs = ref(await getDogs(breedsLimit.value, defautPage.value))
+
+const onScroll = async () => {
+  defautPage.value++
+  const breeds = await getDogs(breedsLimit.value, defautPage.value)
+  dogs.value.push(...breeds)
+}
+
+useInfiniteScroll(el, async () => { await onScroll() }, { distance: 10 })
 
 </script>
 
 <template>
   <section class="flex min-h-screen w-full flex-col items-center justify-start gap-4 bg-white p-2">
-    <article v-if="!pending"
-      class="grid gap-4 overflow-y-auto pb-16 scrollbar-hide md:grid-cols-2 md:pb-0 xl:grid-cols-3">
+    <article ref="el" class="grid gap-4 overflow-y-auto pb-16 scrollbar-hide md:grid-cols-2 md:pb-0 xl:grid-cols-3">
       <card-breed-dog v-for="breed in dogs" :key="breed.id" :name="breed.name" :life_span="breed.life_span"
         :image="breed.image" :temperament="breed.temperament" />
     </article>
 
-    <the-loader v-else>
+    <the-loader v-if="dogs.length < 0">
       <template #icon>
         <Dog class="size-10 animate-bounce text-primary" />
       </template>
@@ -21,6 +34,5 @@ const { breeds: dogs, error, pending } = useDogBreeds()
         <span class="animate-pulse text-muted-foreground">Carregando..</span>
       </template>
     </the-loader>
-    <span v-show="error">{{ error?.message }}</span>
   </section>
 </template>
