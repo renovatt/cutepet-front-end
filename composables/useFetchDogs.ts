@@ -1,15 +1,6 @@
 import { temperamentsTranslation } from '~/constants/temperaments-translation'
 import { breedsDogTranslation } from '~/constants/breeds-dog-translation'
 
-export interface DogBreed {
-  id: string
-  name: string
-  life_span: string
-  reference_image_id: string
-  temperament: string
-  image: { url: string }
-}
-
 export const useFetchDogs = () => {
   const config = useRuntimeConfig()
 

@@ -1,22 +1,8 @@
 <!-- eslint-disable space-before-function-paren -->
 <script setup lang="ts">
 import { Dog } from 'lucide-vue-next'
-import { useInfiniteScroll } from '@vueuse/core'
 
-const { getDogs, defautPage } = useFetchDogs()
-
-const breedsLimit = ref(15)
-const el = ref<HTMLElement | null>(null)
-const dogs = ref(await getDogs(breedsLimit.value, defautPage.value))
-
-const onScroll = async () => {
-  defautPage.value++
-  const breeds = await getDogs(breedsLimit.value, defautPage.value)
-  dogs.value.push(...breeds)
-}
-
-useInfiniteScroll(el, async () => { await onScroll() }, { distance: 10 })
-
+const { dogs, el } = await useScroll()
 </script>
 
 <template>

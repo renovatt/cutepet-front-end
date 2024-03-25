@@ -2,8 +2,8 @@
 const dog = ref(false)
 const cat = ref(true)
 
-const { breeds: cats, error } = await useCatBreeds()
-const { breeds: dogs, error: dogError } = await useDogBreeds()
+const { breeds: cats, error } = useCatBreeds()
+const { breeds: dogs, error: dogError } = useDogBreeds()
 
 </script>
 
@@ -26,7 +26,7 @@ const { breeds: dogs, error: dogError } = await useDogBreeds()
 
     <article v-show="dog" class="grid gap-4 overflow-y-auto pb-16 scrollbar-hide md:grid-cols-2 md:pb-0 xl:grid-cols-3">
       <card-breed-dog v-for="breed in dogs" :key="breed.id" :name="breed.name" :life_span="breed.life_span"
-        :reference_image_id="breed.reference_image_id" :temperament="breed.temperament" />
+        :temperament="breed.temperament" :image="breed.image" />
     </article>
 
     <span v-show="error">cat:{{ error?.message }}</span>
