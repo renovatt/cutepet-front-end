@@ -1,20 +1,43 @@
 <script setup lang="ts">
-import { h } from 'vue'
 import { useForm } from 'vee-validate'
-
 import { toast } from '@/components/ui/toast'
 import { loginFormSchema } from '~/schemas/login-form'
 
 const { handleSubmit } = useForm({
   validationSchema: loginFormSchema,
+  initialValues: {
+    email: 'nest+1@gmail.com',
+    password: '12345678',
+  },
 })
 
-const onSubmit = handleSubmit((values) => {
-  console.log(values)
-  toast({
-    title: 'You submitted the following values:',
-    description: h('pre', { class: 'mt-2 w-[340px] rounded-md bg-slate-950 p-4' }, h('code', { class: 'text-white' }, JSON.stringify(values, null, 2)))
-  })
+const { signin } = useAuth()
+
+const onSubmit = handleSubmit(async (values) => {
+  try {
+    const res = await signin(values)
+
+    if (res.type === 'success') {
+      toast({
+        description: 'Bem vindo!',
+        class: 'text-green-500',
+        duration: 300
+      })
+      setTimeout(() => {
+        useRouter().push('/dashboard')
+      }, 500)
+    } else if (res.type === 'error') {
+      toast({
+        description: res.message,
+        class: 'text-red-500',
+      })
+    }
+  } catch (err) {
+    toast({
+      description: 'Ocorreu um erro inesperado',
+      class: 'text-red-500',
+    })
+  }
 })
 
 </script>

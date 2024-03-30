@@ -6,10 +6,14 @@ definePageMeta({
   middleware: 'auth'
 })
 
+const { accessToken } = useToken()
+
 onMounted(() => {
-  setTimeout(() => {
+  if (accessToken) {
+    useRouter().push('/dashboard')
+  } else {
     useRouter().push('/auth/login')
-  }, 2000)
+  }
 })
 
 </script>

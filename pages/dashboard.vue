@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { Plus } from 'lucide-vue-next'
 
+definePageMeta({ middleware: 'auth' })
+
 const { isOpen } = useToggle()
 const { cards } = useCardsData()
+
 </script>
 
 <template>

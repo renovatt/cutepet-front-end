@@ -2,13 +2,13 @@ import type { Schedule } from '~/utils/entities/schedule'
 
 export const useSchedules = () => {
   const config = useRuntimeConfig()
-  const token = useCookie('@token-cutepet')
+  const { accessToken } = useToken()
 
   const { data: schedules, error, pending, status } = useFetch(`${config.public.baseUrl}/schedules`, {
     lazy: false,
     server: false,
     headers: {
-      Authorization: `Bearer ${token.value}`
+      Authorization: `Bearer ${accessToken}`
     },
     transform: (schedules: Schedule[]) => {
       return schedules.map((schedule: Schedule) => ({

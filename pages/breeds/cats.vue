@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Cat } from 'lucide-vue-next'
 
+definePageMeta({ middleware: 'auth' })
+
 const { breeds: cats, error, pending } = useCatBreeds()
 
 </script>

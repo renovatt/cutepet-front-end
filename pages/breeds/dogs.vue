@@ -1,6 +1,7 @@
-<!-- eslint-disable space-before-function-paren -->
 <script setup lang="ts">
 import { Dog } from 'lucide-vue-next'
+
+definePageMeta({ middleware: 'auth' })
 
 const { dogs, el } = await useScroll()
 </script>

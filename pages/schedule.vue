@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Plus } from 'lucide-vue-next'
 
+definePageMeta({ middleware: 'auth' })
+
 const { isOpen } = useToggle()
 const { lastTwoCards } = useCardsData()
 const { filter, filteredSchedules, handleResetFilter } = useSchedulesFilter()

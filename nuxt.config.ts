@@ -7,7 +7,9 @@ export default defineNuxtConfig({
       catApiKey: process.env.NUXT_CAT_API_KEY,
 
       dogBaseURL: process.env.NUXT_DOG_BASE_URL,
-      dogApiKey: process.env.NUXT_DOG_API_KEY
+      dogApiKey: process.env.NUXT_DOG_API_KEY,
+
+      baseUrl: process.env.NUXT_BASE_URL
     }
   },
   app: {

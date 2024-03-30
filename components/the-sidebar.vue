@@ -5,7 +5,10 @@ import { routes } from '~/constants/routes'
 const isOpen = ref(true)
 const isActive = computed(() => useRoute().path)
 
+const { destroyToken } = useToken()
+
 const handleLogout = () => {
+  destroyToken()
   useRouter().push('/')
 }
 

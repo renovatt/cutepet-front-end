@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import { LogOut } from 'lucide-vue-next'
 
+definePageMeta({ middleware: 'auth' })
+
+const { destroyToken } = useToken()
+
 const handleLogout = () => {
+  destroyToken()
   useRouter().push('/')
 }
+
 </script>
 
 <template>
