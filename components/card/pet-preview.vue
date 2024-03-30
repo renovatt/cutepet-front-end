@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Dumbbell, Cat, Dog, Heart, PawPrint, CalendarDays, Download, Clock } from 'lucide-vue-next'
+import type { Schedule } from '~/utils/entities/schedule'
 
 const { schedule } = defineProps<{ schedule: Schedule }>()
 
@@ -23,7 +24,7 @@ const date = computed(() => new Date(schedule.date)
       <section class="flex w-40 flex-col items-center justify-between gap-4">
         <section class="flex w-full flex-col items-start justify-between gap-2">
           <span class="flex items-center justify-center gap-2 text-muted-foreground">
-            <Cat v-if="schedule.pet === 'cat'" class="size-5 text-primary" />
+            <Cat v-if="schedule.pet === 'CAT'" class="size-5 text-primary" />
             <Dog v-else class="size-5 text-primary" />
             <span class="w-28 truncate text-xs font-bold capitalize">{{ schedule.petname }}</span>
           </span>
@@ -57,3 +58,4 @@ const date = computed(() => new Date(schedule.date)
     </article>
   </section>
 </template>
+~/utils/entities/schedule

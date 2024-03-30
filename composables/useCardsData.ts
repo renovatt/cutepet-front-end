@@ -1,4 +1,5 @@
 import { Clock, CalendarDays, ShowerHead, Stethoscope } from 'lucide-vue-next'
+import type { Schedule } from '~/utils/entities/schedule'
 
 const cardData = [
   {

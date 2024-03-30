@@ -1,3 +1,5 @@
+import type { Schedule } from '~/utils/entities/schedule'
+
 export const useSchedulesFilter = () => {
   const filter = ref(false)
   const filteredSchedules = ref<Schedule[]>([])

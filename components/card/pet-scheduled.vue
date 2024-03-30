@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Cat, Dog, Info, Clock } from 'lucide-vue-next'
+import type { Schedule } from '~/utils/entities/schedule'
 
 const scheduleSelected = ref<Schedule>()
 const { schedule } = defineProps<{ schedule: Schedule }>()
@@ -43,7 +44,7 @@ const handleSelectSchedule = (id: string) => {
       <section class="flex size-20 flex-col items-center justify-center gap-4">
         <section class="flex w-full flex-col items-start justify-between gap-2">
           <span class="flex items-center justify-center gap-2 text-muted-foreground">
-            <Cat v-if="schedule.pet === 'cat'" class="size-5 text-primary" />
+            <Cat v-if="schedule.pet === 'CAT'" class="size-5 text-primary" />
             <Dog v-else class="size-5 text-primary" />
             <p class="text-xs font-bold capitalize text-muted-foreground">{{ schedule.petname }}</p>
           </span>
@@ -57,3 +58,4 @@ const handleSelectSchedule = (id: string) => {
     </article>
   </section>
 </template>
+~/utils/entities/schedule

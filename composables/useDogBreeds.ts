@@ -1,14 +1,6 @@
 import { temperamentsTranslation } from '~/constants/temperaments-translation'
 import { breedsDogTranslation } from '~/constants/breeds-dog-translation'
-
-export interface DogBreed {
-  id: string
-  name: string
-  life_span: string
-  reference_image_id: string
-  temperament: string
-  image:{ url: string }
-}
+import type { DogBreed } from '~/utils/entities/dog-breeds'
 
 export const useDogBreeds = () => {
   const config = useRuntimeConfig()
@@ -46,6 +38,7 @@ export const useDogBreeds = () => {
     error,
     pending,
     status,
-    handleLimitSize
+    handleLimitSize,
+    limit
   }
 }

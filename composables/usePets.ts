@@ -1,3 +1,6 @@
+import type { CatBreed } from '~/utils/entities/cat-breeds'
+import type { DogBreed } from '~/utils/entities/dog-breeds'
+
 const catViralata = {
   id: 'viralata',
   name: 'Viralata',

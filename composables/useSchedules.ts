@@ -1,33 +1,18 @@
-const url = 'https://run.mocky.io/v3/d8b09663-ba1c-4bc8-8163-d1ddc05dbe41'
-
-export type Schedule = {
-  id: string;
-  pet: 'dog' | 'cat';
-  petname: string;
-  breed: {
-      id: string;
-      name: string;
-      reference_image_id: string;
-      image: {
-          url: string;
-      };
-  };
-  age: string;
-  weight: string;
-  sex: string;
-  service: string;
-  date: Date;
-  time: string;
-  obs: string;
-}
+import type { Schedule } from '~/utils/entities/schedule'
 
 export const useSchedules = () => {
-  const { data: schedules, error, pending, status } = useFetch(url, {
+  const config = useRuntimeConfig()
+  const token = useCookie('@token-cutepet')
+
+  const { data: schedules, error, pending, status } = useFetch(`${config.public.baseUrl}/schedules`, {
     lazy: false,
     server: false,
+    headers: {
+      Authorization: `Bearer ${token.value}`
+    },
     transform: (schedules: Schedule[]) => {
       return schedules.map((schedule: Schedule) => ({
-        id: schedule.petname + schedule.date + schedule.time,
+        id: schedule.id,
         pet: schedule.pet,
         petname: schedule.petname,
         age: schedule.age,
@@ -36,11 +21,11 @@ export const useSchedules = () => {
         date: schedule.date,
         time: schedule.time,
         service: schedule.service,
-        obs: schedule.obs,
+        observation: schedule.observation,
+        status: schedule.status,
         breed: {
           id: schedule.breed.id,
           name: schedule.breed.name,
-          reference_image_id: schedule.breed.reference_image_id,
           image: {
             url: schedule.breed.image.url
           }

@@ -1,7 +1,7 @@
 <!-- eslint-disable camelcase -->
 <script setup lang="ts">
 import { Heart, Brain, Zap } from 'lucide-vue-next'
-import type { CatBreed } from '~/composables/useCatBreeds'
+import type { CatBreed } from '~/utils/entities/cat-breeds'
 
 const {
   name,

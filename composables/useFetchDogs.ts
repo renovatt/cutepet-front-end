@@ -1,5 +1,6 @@
 import { temperamentsTranslation } from '~/constants/temperaments-translation'
 import { breedsDogTranslation } from '~/constants/breeds-dog-translation'
+import type { DogBreed } from '~/utils/entities/dog-breeds'
 
 export const useFetchDogs = () => {
   const config = useRuntimeConfig()

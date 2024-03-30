@@ -1,6 +1,6 @@
 <!-- eslint-disable camelcase -->
 <script setup lang="ts">
-import type { DogBreed } from '~/composables/useDogBreeds'
+import type { DogBreed } from '~/utils/entities/dog-breeds'
 
 const {
   name,

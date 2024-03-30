@@ -2,9 +2,10 @@ import { z } from 'zod'
 import { toTypedSchema } from '@vee-validate/zod'
 
 export const scheduleFormSchema = toTypedSchema(z.object({
-  pet: z.enum(['dog', 'cat']),
+  status: z.enum(['PENDING', 'FINISHED', 'CANCELED']),
+  pet: z.enum(['DOG', 'CAT']),
   petname: z.string({ required_error: 'Informe um nome' }).min(3, 'Pelo menos 3 caracteres').max(20, 'No máximo 20 caracteres'),
-  obs: z.string().min(5, 'Pelo menos 5 caracteres'),
+  observation: z.string().min(5, 'Pelo menos 5 caracteres'),
   weight: z.string(),
   age: z.string(),
   sex: z.string(),
@@ -21,8 +22,7 @@ export const scheduleFormSchema = toTypedSchema(z.object({
     image: z.object({
       url: z.string({ required_error: 'Imagem não encontrada' })
     }),
-    reference_image_id: z.string({ required_error: 'Referência da imagem não encontrada' }),
   }),
 }))
 
-export const PetProps: typeof scheduleFormSchema = (scheduleFormSchema as typeof scheduleFormSchema)
+export const scheduleSchema: typeof scheduleFormSchema = (scheduleFormSchema as typeof scheduleFormSchema)
