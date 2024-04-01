@@ -17,7 +17,7 @@ const attributes = computed(() => scheduleData.value)
 
 watch(schedules, (newSchedules) => {
   scheduleData.value = newSchedules?.map(schedule => ({
-    key: schedule.id,
+    key: schedule.id as string,
     customData: {
       title: schedule.service === 'clinic' ? 'Clínica' : ' Banho e tosa',
       class: schedule.service === 'clinic' ? 'bg-blue-500 text-white' : 'bg-primary text-white',
