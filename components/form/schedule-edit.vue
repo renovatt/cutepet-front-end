@@ -20,7 +20,7 @@ const chosenPet = ref(schedule.pet)
 
 const { cats, dogs } = usePets()
 const { handleLimitSize } = useDogBreeds()
-const { update } = useHandleSchedules()
+const { update } = useSchedules()
 
 const searchBreed = (name: string) => {
   const breedExists = dogs.value.some(dog => dog.name === name)
