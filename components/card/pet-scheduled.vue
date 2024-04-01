@@ -32,7 +32,8 @@ const handleSelectSchedule = (id: string) => {
   </the-modal>
 
   <section class="relative flex w-48 items-center justify-between rounded-lg border shadow">
-    <Info class=" absolute right-1 top-1 size-5 cursor-pointer text-primary/70 transition-all hover:text-primary"
+    <Info v-if="schedule.id"
+      class=" absolute right-1 top-1 size-5 cursor-pointer text-primary/70 transition-all hover:text-primary"
       @click="handleSelectSchedule(schedule.id)" />
     <article class="flex w-full items-center justify-around gap-2 p-2 py-4 lg:justify-center">
 

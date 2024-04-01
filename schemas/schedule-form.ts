@@ -2,6 +2,8 @@ import { z } from 'zod'
 import { toTypedSchema } from '@vee-validate/zod'
 
 export const scheduleFormSchema = toTypedSchema(z.object({
+  id: z.string().optional(),
+  userId: z.string().optional(),
   status: z.enum(['PENDING', 'FINISHED', 'CANCELED']),
   pet: z.enum(['DOG', 'CAT']),
   petname: z.string({ required_error: 'Informe um nome' }).min(3, 'Pelo menos 3 caracteres').max(20, 'No máximo 20 caracteres'),

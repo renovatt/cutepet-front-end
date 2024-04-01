@@ -1,5 +1,6 @@
 export type Schedule = {
-  id: string;
+  id?: string;
+  userId?: string;
   status: 'PENDING' | 'FINISHED' | 'CANCELED';
   pet: 'CAT' | 'DOG';
   petname: string;

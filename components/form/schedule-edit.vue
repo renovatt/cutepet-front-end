@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { h } from 'vue'
 import { format } from 'date-fns'
 import { useForm } from 'vee-validate'
 import { CalendarIcon, Check, ChevronsUpDown } from 'lucide-vue-next'
@@ -8,6 +7,7 @@ import { toast } from '../ui/toast'
 import { cn } from '~/lib/utils'
 import { scheduleFormSchema } from '~/schemas/schedule-form'
 import { age, sex, weight, times, services } from '~/constants/inputs'
+import type { Schedule } from '~/utils/entities/schedule'
 
 const { schedule } = defineProps<{ schedule: Schedule }>()
 
@@ -19,13 +19,44 @@ const { handleSubmit, setValues, values } = useForm({
 const chosenPet = ref(schedule.pet)
 
 const { cats, dogs } = usePets()
+const { handleLimitSize } = useDogBreeds()
+const { update } = useHandleSchedules()
 
-const onSubmit = handleSubmit((values) => {
-  console.log(values)
-  toast({
-    title: 'You submitted the following values:',
-    description: h('pre', { class: 'mt-2 w-[340px] rounded-md bg-slate-950 p-4' }, h('code', { class: 'text-white' }, JSON.stringify(values, null, 2)))
-  })
+const searchBreed = (name: string) => {
+  const breedExists = dogs.value.some(dog => dog.name === name)
+
+  if (!breedExists) {
+    handleLimitSize()
+  }
+}
+
+onMounted(() => {
+  if (chosenPet.value === 'DOG') {
+    handleLimitSize()
+  }
+})
+
+watch(chosenPet, () => {
+  if (chosenPet.value === 'DOG') {
+    searchBreed(schedule.breed.name)
+  }
+}, { immediate: true })
+
+const onSubmit = handleSubmit(async (values) => {
+  if (schedule.id) {
+    const res = await update(values, schedule.id)
+    if (res.type === 'success') {
+      toast({
+        description: 'Atualizado com sucesso!',
+        class: 'text-green-500',
+      })
+    } else if (res.type === 'error') {
+      toast({
+        description: res.message,
+        class: 'text-red-500',
+      })
+    }
+  }
 })
 </script>
 
@@ -56,7 +87,7 @@ const onSubmit = handleSubmit((values) => {
                     <AvatarImage :src="values.breed?.image?.url ?? ''" :alt="values.breed?.name" />
                     <AvatarFallback>P</AvatarFallback>
                   </Avatar>
-                  <span v-if="chosenPet === 'cat'" class="w-20 truncate">
+                  <span v-if="chosenPet === 'CAT'" class="w-20 truncate">
                     {{ values.breed?.id ? cats?.find((breed) => breed.id === values.breed?.id)?.name : 'Escholha a raça'
                     }}
                   </span>
@@ -71,11 +102,11 @@ const onSubmit = handleSubmit((values) => {
             </PopoverTrigger>
             <PopoverContent class="w-44 p-0">
               <Command>
-                <CommandInput v-if="chosenPet === 'cat'" placeholder="Siamês" />
-                <CommandInput v-else placeholder="Pastor Alemão" />
+                <CommandInput v-if="chosenPet === 'CAT'" placeholder="Siamês" />
+                <CommandInput v-else placeholder="Pastor Alemão" @input="searchBreed" />
                 <CommandEmpty>Nada encontrado.</CommandEmpty>
                 <CommandList>
-                  <CommandGroup v-if="chosenPet === 'cat'">
+                  <CommandGroup v-if="chosenPet === 'CAT'">
                     <CommandItem v-for="breed in cats" :key="breed.id" :value="breed.id"
                       @select="() => { setValues({ breed }) }">
                       <Avatar class="mr-2 size-5">
@@ -245,7 +276,7 @@ const onSubmit = handleSubmit((values) => {
       </FormItem>
     </FormField>
 
-    <FormField v-slot="{ componentField }" name="obs">
+    <FormField v-slot="{ componentField }" name="observation">
       <FormItem>
         <FormLabel>Observação</FormLabel>
         <FormControl>
@@ -262,3 +293,4 @@ const onSubmit = handleSubmit((values) => {
     </Button>
   </form>
 </template>
+~/utils/entities/schedule

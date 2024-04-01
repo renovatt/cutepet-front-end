@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { h } from 'vue'
 import { format } from 'date-fns'
 import { useForm } from 'vee-validate'
 
@@ -9,24 +8,27 @@ import { cn } from '~/lib/utils'
 import { scheduleFormSchema } from '~/schemas/schedule-form'
 import { age, sex, weight, services, times } from '~/constants/inputs'
 
+const userId = decodeUserId()
+
 const defaultValues = {
   petname: '',
-  obs: 'Sem observações.',
+  userId: userId as string,
+  pet: 'DOG' as 'DOG' | 'CAT',
+  status: 'PENDING' as 'PENDING' | 'FINISHED' | 'CANCELED',
+  observation: 'Sem observações.',
   weight: weight[0].value,
   age: age[0].value,
   sex: sex[0].value,
   service: services[0].value,
   time: '',
+  date: new Date(),
   breed: {
     id: 'viralata',
     name: 'Viralata',
-    reference_image_id: '',
     image: {
       url: 'https://i.pinimg.com/originals/ef/0e/ab/ef0eaba2dbc1b61d8770796f758e41c7.jpg'
     }
   },
-  pet: 'dog' as 'dog' | 'cat',
-  date: new Date()
 }
 
 const { handleSubmit, setValues, values } = useForm({
@@ -37,7 +39,8 @@ const { handleSubmit, setValues, values } = useForm({
 const chosenPet = ref(false)
 
 const { cats, dogs } = usePets()
-const { handleLimitSize } = useDogBreeds()
+const { handleLimitSize, limit } = useDogBreeds()
+const { create } = useHandleSchedules()
 
 const searchBreed = (name: string) => {
   const breedExists = dogs.value.some(dog => dog.name === name)
@@ -47,12 +50,19 @@ const searchBreed = (name: string) => {
   }
 }
 
+onMounted(() => {
+  handleLimitSize()
+})
+
 watch(chosenPet, () => {
+  limit.value = 70
+  handleLimitSize()
+
   setValues({ breed: defaultValues.breed })
 
   if (chosenPet.value) {
     setValues({
-      pet: 'cat',
+      pet: 'CAT',
       breed: {
         image: {
           url: 'https://cdn.shopify.com/s/files/1/0500/8965/6473/files/cat-gdede5f720_1920_480x480.jpg?v=1663248430',
@@ -62,12 +72,19 @@ watch(chosenPet, () => {
   }
 })
 
-const onSubmit = handleSubmit((values) => {
-  console.log(values)
-  toast({
-    title: 'You submitted the following values:',
-    description: h('pre', { class: 'mt-2 w-[340px] rounded-md bg-slate-950 p-4' }, h('code', { class: 'text-white' }, JSON.stringify(values, null, 2)))
-  })
+const onSubmit = handleSubmit(async (values) => {
+  const res = await create(values)
+  if (res.type === 'success') {
+    toast({
+      description: 'Agendado com sucesso!',
+      class: 'text-green-500',
+    })
+  } else if (res.type === 'error') {
+    toast({
+      description: res.message,
+      class: 'text-red-500',
+    })
+  }
 })
 </script>
 
@@ -304,7 +321,7 @@ const onSubmit = handleSubmit((values) => {
         </FormItem>
       </FormField>
 
-      <FormField v-slot="{ componentField }" name="obs">
+      <FormField v-slot="{ componentField }" name="observation">
         <FormItem>
           <FormLabel>Observação</FormLabel>
           <FormControl>
