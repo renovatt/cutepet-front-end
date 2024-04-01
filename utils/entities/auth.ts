@@ -1,13 +1,13 @@
-type ResponseAPI = {
+type AuthAPI = {
   accessToken: string
   type: 'success'
 }
 
-type ErrorAPI = {
+export type ErrorAPI = {
   type: 'error',
   message: string,
   error: string,
   statusCode: number
 }
 
-export type APIResult = ResponseAPI | ErrorAPI
+export type AuthResultAPI = AuthAPI | ErrorAPI

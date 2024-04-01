@@ -1,11 +1,11 @@
 import type { User } from '~/utils/entities/user'
-import type { APIResult } from '~/utils/entities/auth'
+import type { AuthResultAPI } from '~/utils/entities/auth'
 
 export const useAuth = () => {
   const config = useRuntimeConfig()
   const { saveToken } = useToken()
 
-  const signin = async (data: Partial<User>): Promise<APIResult> => {
+  const signin = async (data: Partial<User>): Promise<AuthResultAPI> => {
     const response = await fetch(`${config.public.baseUrl}/auth/signin`, {
       method: 'POST',
       headers: {
@@ -32,7 +32,7 @@ export const useAuth = () => {
     }
   }
 
-  const signup = async (data: User): Promise<APIResult> => {
+  const signup = async (data: User): Promise<AuthResultAPI> => {
     const response = await fetch(`${config.public.baseUrl}/auth/signup`, {
       method: 'POST',
       headers: {
