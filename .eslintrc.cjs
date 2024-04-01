@@ -20,7 +20,7 @@ module.exports = {
     'vue/first-attribute-linebreak': 'off',
     'vue/html-closing-bracket-newline': 'off',
     'vue/max-attributes-per-line': 'off',
-    'space-before-function-paren': ['error', 'never'],
+    'space-before-function-paren': 'off',
     'tailwindcss/no-custom-classname': 'off',
     'vue/multiline-html-element-content-newline': 'off'
   }
