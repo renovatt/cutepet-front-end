@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Cat, Dog, Info, Clock } from 'lucide-vue-next'
+import { Cat, Dog, Info, Clock, Calendar } from 'lucide-vue-next'
 import type { Schedule } from '~/utils/entities/schedule'
 
 const scheduleSelected = ref<Schedule>()
@@ -7,6 +7,12 @@ const { schedule } = defineProps<{ schedule: Schedule }>()
 
 const { isOpen } = useToggle()
 const { schedules } = useSchedules()
+
+const date = computed(() => new Date(schedule.date).toLocaleDateString('pt-BR', {
+  day: '2-digit',
+  month: '2-digit',
+  year: '2-digit'
+}))
 
 const handleSelectSchedule = (id: string) => {
   const schedule = schedules.value?.find(schedule => schedule.id === id)
@@ -31,28 +37,35 @@ const handleSelectSchedule = (id: string) => {
     </template>
   </the-modal>
 
-  <section class="relative flex w-48 items-center justify-between rounded-lg border shadow">
+  <section
+    class="relative flex h-28 w-24 items-center justify-between rounded-lg border px-2 pt-2 shadow md:w-48 md:pt-0">
     <Info v-if="schedule.id"
       class=" absolute right-1 top-1 size-5 cursor-pointer text-primary/70 transition-all hover:text-primary"
       @click="handleSelectSchedule(schedule.id)" />
-    <article class="flex w-full items-center justify-around gap-2 p-2 py-4 lg:justify-center">
+    <article class="flex w-full items-center justify-around gap-2 py-4 lg:justify-center">
 
-      <figure class="grid size-20 place-items-center rounded-lg bg-primary-foreground">
-        <the-image-skeleton class="size-20 rounded-lg bg-primary object-cover" :src="schedule.breed.image.url"
+      <figure class="hidden size-20 place-items-center bg-primary-foreground md:grid">
+        <the-image-skeleton class="size-20 rounded-lg border bg-primary object-cover" :src="schedule.breed.image.url"
           :alt="schedule.breed.name" />
       </figure>
 
-      <section class="flex size-20 flex-col items-center justify-center gap-4">
-        <section class="flex w-full flex-col items-start justify-between gap-2">
+      <section class="flex size-20 flex-col items-center justify-center">
+        <section class="flex w-full flex-col items-start justify-between gap-1">
           <span class="flex items-center justify-center gap-2 text-muted-foreground">
             <Cat v-if="schedule.pet === 'CAT'" class="size-5 text-primary" />
             <Dog v-else class="size-5 text-primary" />
-            <p class="text-xs font-bold capitalize text-muted-foreground">{{ schedule.petname }}</p>
+            <p class="w-14 truncate text-xs font-bold capitalize text-muted-foreground">{{ schedule.breed.name }}
+            </p>
           </span>
 
           <span class="flex items-center justify-center gap-2 text-muted-foreground">
             <Clock class="size-5 text-primary" />
             <p class="text-xs font-bold text-muted-foreground">{{ schedule.time }}h</p>
+          </span>
+
+          <span class="flex items-center justify-center gap-2 text-muted-foreground">
+            <Calendar class="size-5 text-primary" />
+            <p class="text-xs font-bold text-muted-foreground">{{ date }}</p>
           </span>
         </section>
       </section>
