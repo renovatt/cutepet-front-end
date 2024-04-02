@@ -7,11 +7,12 @@ type ScheduleDataProps = {
   }
   dates: Date
 }
-const { schedules } = useSchedules()
 
+const isLoading = ref(true)
 const masks = ref({ weekdays: 'WWW', })
-
 const scheduleData = ref<ScheduleDataProps[]>([])
+
+const { schedules } = useSchedules()
 
 const attributes = computed(() => scheduleData.value)
 
@@ -24,6 +25,7 @@ watch(schedules, (newSchedules) => {
     },
     dates: new Date(schedule.date),
   })) || []
+  isLoading.value = false
 })
 
 </script>
@@ -35,7 +37,10 @@ watch(schedules, (newSchedules) => {
         <div class="z-10 flex h-full flex-col overflow-hidden">
           <span class="day-label text-sm text-gray-900">{{ day.day }}</span>
           <div class="relative grow overflow-auto scrollbar-hide">
-            <p v-for="attr in attributes" :key="attr.key" class="mb-1 mt-0 rounded-sm p-1 text-xs leading-tight"
+            <p v-if="isLoading" class="mb-1 mt-0 rounded-sm bg-primary p-1 text-xs leading-tight text-white opacity-50">
+              Carregando...
+            </p>
+            <p v-for="attr in attributes" v-else :key="attr.key" class="mb-1 mt-0 rounded-sm p-1 text-xs leading-tight"
               :class="attr.customData.class">
               {{ attr.customData.title }}
             </p>
