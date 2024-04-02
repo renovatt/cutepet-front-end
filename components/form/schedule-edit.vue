@@ -36,12 +36,6 @@ onMounted(() => {
   }
 })
 
-watch(chosenPet, () => {
-  if (chosenPet.value === 'DOG') {
-    searchBreed(schedule.breed.name)
-  }
-}, { immediate: true })
-
 const onSubmit = handleSubmit(async (values) => {
   if (schedule.id) {
     const res = await update(values, schedule.id)
