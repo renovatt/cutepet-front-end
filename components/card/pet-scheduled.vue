@@ -59,12 +59,13 @@ const handleChangeStatus = async (status: 'FINISHED' | 'CANCELED') => {
         <aside class="flex h-80 flex-col justify-between">
           <card-pet-preview v-if="scheduleSelected" :schedule="scheduleSelected" />
           <div class="flex flex-col gap-2">
-            <Button class="w-full rounded-lg bg-primary py-2 text-white" @click="handleChangeStatus('FINISHED')">
+            <Button class="w-full rounded-lg bg-primary py-2 text-white shadow-none"
+              @click="handleChangeStatus('FINISHED')">
               Finalizar
             </Button>
 
             <Button
-              class="w-full rounded-lg border border-primary bg-transparent py-2 text-primary hover:bg-transparent hover:opacity-70"
+              class="w-full rounded-lg border border-primary bg-transparent py-2 text-primary shadow-none hover:bg-transparent hover:opacity-70"
               @click="handleChangeStatus('CANCELED')">
               Cancelar
             </Button>
