@@ -75,6 +75,7 @@ watch(chosenPet, () => {
 const onSubmit = handleSubmit(async (values) => {
   const res = await create(values)
   if (res.type === 'success') {
+    setValues(defaultValues)
     toast({
       description: 'Agendado com sucesso!',
       class: 'text-green-500',
