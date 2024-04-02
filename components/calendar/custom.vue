@@ -20,7 +20,7 @@ watch(schedules, (newSchedules) => {
   scheduleData.value = newSchedules?.map(schedule => ({
     key: schedule.id as string,
     customData: {
-      title: schedule.service === 'clinic' ? 'Clínica' : ' Banho e tosa',
+      title: schedule.service === 'clinic' ? 'Consulta' : ' Banho e tosa',
       class: schedule.status === 'PENDING' && schedule.service === 'clinic' ? 'bg-blue-500 text-white' : schedule.status === 'CANCELED' ? 'bg-red-500 text-white' : schedule.status === 'FINISHED' ? 'bg-green-500 text-white' : 'bg-orange-500 text-white',
     },
     dates: new Date(schedule.date),

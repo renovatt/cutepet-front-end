@@ -55,7 +55,7 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <form class="w-full space-y-2 rounded border p-2 shadow md:w-2/3" @submit="onSubmit">
+  <form class="w-full space-y-2 rounded p-2 md:w-2/3" @submit="onSubmit">
     <div class="flex w-full flex-col items-center justify-between gap-4 md:flex-row">
       <FormField v-slot="{ componentField }" name="petname">
         <FormItem class="w-full md:w-44">
@@ -287,4 +287,3 @@ const onSubmit = handleSubmit(async (values) => {
     </Button>
   </form>
 </template>
-~/utils/entities/schedule

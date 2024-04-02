@@ -89,7 +89,7 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <section class="flex w-full flex-col space-y-2 rounded border p-2 shadow md:w-2/3">
+  <section class="flex w-full flex-col space-y-2 rounded p-2 md:w-2/3">
     <section class="flex w-full items-center justify-start gap-4">
       <Button @click="chosenPet = !chosenPet">
         O pet é um:

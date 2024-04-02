@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Cat, Dog, Info, Clock, Calendar } from 'lucide-vue-next'
+import { Info, Clock, Calendar, ShowerHead, Stethoscope } from 'lucide-vue-next'
 import { toast } from '../ui/toast'
 import type { Schedule } from '~/utils/entities/schedule'
 
@@ -56,7 +56,7 @@ const handleChangeStatus = async (status: 'FINISHED' | 'CANCELED') => {
       <section class="mt-2 flex flex-col items-start justify-around gap-4 rounded-lg p-4 md:flex-row">
         <form-schedule-edit v-if="scheduleSelected" :schedule="scheduleSelected" />
 
-        <aside class="flex h-80 flex-col justify-between">
+        <aside class="flex size-full flex-col justify-between space-y-4 md:h-80">
           <card-pet-preview v-if="scheduleSelected" :schedule="scheduleSelected" />
           <div class="flex flex-col gap-2">
             <Button class="w-full rounded-lg bg-primary py-2 text-white shadow-none"
@@ -75,14 +75,13 @@ const handleChangeStatus = async (status: 'FINISHED' | 'CANCELED') => {
     </template>
   </the-modal>
 
-  <section
-    class="relative flex h-28 w-24 items-center justify-between rounded-lg border px-2 pt-2 shadow md:w-48 md:pt-0">
+  <section class="relative flex w-36 items-center justify-between rounded-lg border px-2 pt-2 shadow md:w-48 md:pt-0">
     <Info v-if="schedule.id"
       class=" absolute right-1 top-1 size-5 cursor-pointer text-primary/70 transition-all hover:text-primary"
       @click="handleSelectSchedule(schedule.id)" />
-    <article class="flex w-full items-center justify-around gap-2 py-4 lg:justify-center">
+    <article class="flex w-full flex-col items-center justify-around gap-2 py-4 md:flex-row lg:justify-center">
 
-      <figure class="hidden size-20 place-items-center bg-primary-foreground md:grid">
+      <figure class="grid size-20 place-items-center bg-primary-foreground">
         <the-image-skeleton class="size-20 rounded-lg border bg-primary object-cover" :src="schedule.breed.image.url"
           :alt="schedule.breed.name" />
       </figure>
@@ -90,9 +89,10 @@ const handleChangeStatus = async (status: 'FINISHED' | 'CANCELED') => {
       <section class="flex size-20 flex-col items-center justify-center">
         <section class="flex w-full flex-col items-start justify-between gap-1">
           <span class="flex items-center justify-center gap-2 text-muted-foreground">
-            <Cat v-if="schedule.pet === 'CAT'" class="size-5 text-primary" />
-            <Dog v-else class="size-5 text-primary" />
-            <p class="w-14 truncate text-xs font-bold capitalize text-muted-foreground">{{ schedule.breed.name }}
+            <ShowerHead v-if="schedule.service === 'bath-grooming'" class="size-5 text-primary" />
+            <Stethoscope v-else class="size-5 text-primary" />
+            <p class="w-14 truncate text-xs font-bold capitalize text-muted-foreground">
+              {{ schedule.service === 'bath-grooming' ? 'Banho e Tosa' : 'Consulta' }}
             </p>
           </span>
 
