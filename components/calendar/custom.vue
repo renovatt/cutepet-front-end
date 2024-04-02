@@ -20,7 +20,7 @@ watch(schedules, (newSchedules) => {
     key: schedule.id as string,
     customData: {
       title: schedule.service === 'clinic' ? 'Clínica' : ' Banho e tosa',
-      class: schedule.service === 'clinic' ? 'bg-blue-500 text-white' : 'bg-primary text-white',
+      class: schedule.status === 'PENDING' && schedule.service === 'clinic' ? 'bg-blue-500 text-white' : schedule.status === 'CANCELED' ? 'bg-red-500 text-white' : schedule.status === 'FINISHED' ? 'bg-green-500 text-white' : 'bg-orange-500 text-white',
     },
     dates: new Date(schedule.date),
   })) || []
@@ -30,8 +30,7 @@ watch(schedules, (newSchedules) => {
 
 <template>
   <div class="text-center">
-    <Calendar class="custom-calendar max-w-full" :masks="masks" :attributes="attributes" disable-page-swipe
-      is-expanded>
+    <Calendar class="custom-calendar max-w-full" :masks="masks" :attributes="attributes" disable-page-swipe is-expanded>
       <template #day-content="{ day, attributes }">
         <div class="z-10 flex h-full flex-col overflow-hidden">
           <span class="day-label text-sm text-gray-900">{{ day.day }}</span>

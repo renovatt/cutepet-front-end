@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { Cat, Dog, Info, Clock, Calendar } from 'lucide-vue-next'
+import { toast } from '../ui/toast'
 import type { Schedule } from '~/utils/entities/schedule'
 
 const scheduleSelected = ref<Schedule>()
 const { schedule } = defineProps<{ schedule: Schedule }>()
 
 const { isOpen } = useToggle()
-const { schedules } = useSchedules()
+const { schedules, patch } = useSchedules()
 
 const date = computed(() => new Date(schedule.date).toLocaleDateString('pt-BR', {
   day: '2-digit',
@@ -21,6 +22,33 @@ const handleSelectSchedule = (id: string) => {
     isOpen.value = true
   }
 }
+
+watch(schedules, (newSchedules) => {
+  if (scheduleSelected.value) {
+    const updatedSchedule = newSchedules?.find(schedule => schedule.id === scheduleSelected.value?.id)
+    if (updatedSchedule) {
+      scheduleSelected.value = updatedSchedule
+    }
+  }
+})
+
+const handleChangeStatus = async (status: 'FINISHED' | 'CANCELED') => {
+  const res = await patch({ status }, scheduleSelected.value?.id as string)
+
+  if (res.type === 'success') {
+    toast({
+      description: `${status === 'FINISHED' ? 'Agendamento finalizado' : 'Agendamento cancelado'}`,
+      class: 'text-green-500',
+      duration: 1000
+    })
+  } else if (res.type === 'error') {
+    toast({
+      description: res.message,
+      class: 'text-red-500',
+    })
+  }
+}
+
 </script>
 
 <template>
@@ -32,7 +60,21 @@ const handleSelectSchedule = (id: string) => {
     <template #content>
       <section class="mt-2 flex flex-col items-start justify-around gap-4 rounded-lg p-4 md:flex-row">
         <form-schedule-edit v-if="scheduleSelected" :schedule="scheduleSelected" />
-        <card-pet-preview v-if="scheduleSelected" :schedule="scheduleSelected" />
+
+        <aside class="flex h-80 flex-col justify-between">
+          <card-pet-preview v-if="scheduleSelected" :schedule="scheduleSelected" />
+          <div class="flex flex-col gap-2">
+            <Button class="w-full rounded-lg bg-primary py-2 text-white" @click="handleChangeStatus('FINISHED')">
+              Finalizar
+            </Button>
+
+            <Button
+              class="w-full rounded-lg border border-primary bg-transparent py-2 text-primary hover:bg-transparent hover:opacity-70"
+              @click="handleChangeStatus('CANCELED')">
+              Cancelar
+            </Button>
+          </div>
+        </aside>
       </section>
     </template>
   </the-modal>

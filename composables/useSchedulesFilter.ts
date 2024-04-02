@@ -10,7 +10,7 @@ export const useSchedulesFilter = () => {
   watchEffect(() => {
     const dateFilter = selectedDate.value
     filteredSchedules.value = schedules.value?.filter(schedule =>
-      !dateFilter || new Date(schedule.date).toISOString().split('T')[0] === dateFilter
+      (!dateFilter || new Date(schedule.date).toISOString().split('T')[0] === dateFilter) && schedule.status === 'PENDING'
     ) || []
 
     if (dateFilter) {
