@@ -4,12 +4,6 @@ import type { Schedule } from '~/utils/entities/schedule'
 
 const { schedule } = defineProps<{ schedule: Schedule }>()
 
-const date = computed(() => new Date(schedule.date)
-  .toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: '2-digit',
-    year: '2-digit'
-  }))
 </script>
 
 <template>
@@ -51,11 +45,11 @@ const date = computed(() => new Date(schedule.date)
 
           <span class="flex items-center justify-center gap-2 text-muted-foreground">
             <Clock class="size-5 text-primary" />
-            <span class="w-28 text-start text-xs font-bold">{{ date }} - {{ schedule.time }}h</span>
+            <span class="w-28 text-start text-xs font-bold">
+              {{ formatDate(schedule.date) }} - {{ schedule.time }}h</span>
           </span>
         </section>
       </section>
     </article>
   </section>
 </template>
-~/utils/entities/schedule

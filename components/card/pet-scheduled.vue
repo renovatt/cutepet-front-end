@@ -4,16 +4,11 @@ import { toast } from '../ui/toast'
 import type { Schedule } from '~/utils/entities/schedule'
 
 const scheduleSelected = ref<Schedule>()
+
 const { schedule } = defineProps<{ schedule: Schedule }>()
 
 const { isOpen } = useToggle()
 const { schedules, patch } = useSchedules()
-
-const date = computed(() => new Date(schedule.date).toLocaleDateString('pt-BR', {
-  day: '2-digit',
-  month: '2-digit',
-  year: '2-digit'
-}))
 
 const handleSelectSchedule = (id: string) => {
   const schedule = schedules.value?.find(schedule => schedule.id === id)
@@ -107,11 +102,10 @@ const handleChangeStatus = async (status: 'FINISHED' | 'CANCELED') => {
 
           <span class="flex items-center justify-center gap-2 text-muted-foreground">
             <Calendar class="size-5 text-primary" />
-            <p class="text-xs font-bold text-muted-foreground">{{ date }}</p>
+            <p class="text-xs font-bold text-muted-foreground">{{ formatDate(schedule.date) }}</p>
           </span>
         </section>
       </section>
     </article>
   </section>
 </template>
-~/utils/entities/schedule

@@ -8,7 +8,7 @@ export type Schedule = {
   weight: string;
   sex: string;
   service: string;
-  date: Date;
+  date: string;
   time: string;
   observation: string;
   breed: {
