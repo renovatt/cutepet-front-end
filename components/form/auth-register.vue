@@ -4,12 +4,7 @@ import { toast } from '@/components/ui/toast'
 import { registerFormSchema } from '~/schemas/register-form'
 
 const { handleSubmit } = useForm({
-  validationSchema: registerFormSchema,
-  initialValues: {
-    name: 'Nest',
-    email: 'nest+3@gmail.com',
-    password: '12345678',
-  },
+  validationSchema: registerFormSchema
 })
 const { signup } = useAuth()
 

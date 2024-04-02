@@ -21,7 +21,7 @@ const cardData = [
     icon: ShowerHead
   },
   {
-    title: 'Clínica',
+    title: 'Consulta',
     value: 0,
     subtitle: 'Agendamentos',
     icon: Stethoscope
