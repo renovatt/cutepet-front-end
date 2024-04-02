@@ -36,7 +36,7 @@ export const useCardsData = () => {
   const lastTwoCards = computed(() => cards.value.slice(-2))
 
   const handleCalculateValues = () => {
-    values.value[0] = schedules.value?.reduce((acc: number, schedule: Schedule) => {
+    values.value[0] = schedules.value?.filter(schedule => schedule.status === 'PENDING').reduce((acc: number, schedule: Schedule) => {
       const scheduleDate = new Date(schedule.date)
       const today = new Date()
 
@@ -50,9 +50,9 @@ export const useCardsData = () => {
       return acc
     }, 0) ?? 0
 
-    values.value[1] = schedules.value?.length ?? 0
-    values.value[2] = schedules.value?.filter((schedule: Schedule) => schedule.service === 'bath-grooming').length ?? 0
-    values.value[3] = schedules.value?.filter((schedule: Schedule) => schedule.service === 'clinic').length ?? 0
+    values.value[1] = schedules.value?.filter((schedule: Schedule) => schedule.status === 'PENDING').length ?? 0
+    values.value[2] = schedules.value?.filter((schedule: Schedule) => schedule.service === 'bath-grooming' && schedule.status === 'PENDING').length ?? 0
+    values.value[3] = schedules.value?.filter((schedule: Schedule) => schedule.service === 'clinic' && schedule.status === 'PENDING').length ?? 0
 
     cards.value.forEach((card, index) => {
       card.value = values.value[index]
