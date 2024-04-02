@@ -1,5 +1,5 @@
 <script setup>
-import { ChevronLeft, ChevronRight, Settings, LogOut } from 'lucide-vue-next'
+import { ChevronLeft, ChevronRight, LogOut } from 'lucide-vue-next'
 import { routes } from '~/constants/routes'
 
 const isOpen = ref(true)
@@ -43,18 +43,18 @@ const handleLogout = () => {
         <NuxtLink to="/settings"
           :class="isActive === '/settings' ? 'bg-secondary-foreground/5 text-primary' : 'text-muted-foreground'"
           class="flex w-full items-center justify-center gap-5 rounded-lg p-2 transition-all hover:bg-secondary-foreground/5 md:hidden">
-          <Settings :class="isActive === '/settings' ? 'text-primary' : 'text-muted-foreground'" />
+          <LogOut :class="isActive === '/settings' ? 'text-primary' : 'text-muted-foreground'" />
         </Nuxtlink>
       </ul>
     </nav>
 
     <section class="absolute bottom-5 hidden w-[93%] flex-col items-center justify-center gap-2 md:flex">
-      <NuxtLink to="/settings"
+      <!-- <NuxtLink to="/settings"
         :class="isActive === '/settings' ? 'bg-secondary-foreground/5 text-primary' : 'text-muted-foreground'"
         class="flex w-full items-center justify-center gap-5 rounded-lg p-2 transition-all hover:bg-secondary-foreground/5">
         <Settings :class="isActive === '/settings' ? 'text-primary' : 'text-muted-foreground'" />
         <span :class="isOpen ? 'flex w-24' : 'hidden'">Configurações</span>
-      </Nuxtlink>
+      </Nuxtlink> -->
 
       <Button
         class="flex w-full cursor-pointer items-center justify-center gap-5 rounded-lg bg-transparent p-2 text-muted-foreground shadow-none hover:bg-secondary-foreground/5  hover:text-primary"

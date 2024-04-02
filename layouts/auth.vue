@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { PawPrint } from 'lucide-vue-next'
 
-const loginWithGoogle = () => {
-  useRouter().push('/dashboard')
-}
+// const loginWithGoogle = () => {
+//   useRouter().push('/dashboard')
+// }
 </script>
 
 <template>
@@ -25,11 +25,11 @@ const loginWithGoogle = () => {
           <PawPrint class="size-5 -rotate-45 text-muted-foreground" />
           <Separator class="w-36" />
         </div>
-        <Button type="button"
+        <!-- <Button type="button"
           class="w-80 rounded-full border bg-white py-5 text-muted-foreground transition-all hover:bg-secondary-foreground/5"
           @click="loginWithGoogle">
           <icon-google class="mr-2 size-6" /> Faça login com o Google
-        </Button>
+        </Button> -->
         <slot name="footer" />
       </section>
     </article>
