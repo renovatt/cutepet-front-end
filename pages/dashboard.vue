@@ -2,6 +2,9 @@
 import { Plus } from 'lucide-vue-next'
 
 definePageMeta({ middleware: 'auth' })
+useHead({
+  title: 'Dashboard'
+})
 
 const { isOpen } = useToggle()
 const { cards } = useCardsData()

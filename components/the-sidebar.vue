@@ -25,7 +25,9 @@ const handleLogout = () => {
       @click="isOpen = !isOpen" />
 
     <section class="hidden w-full flex-col items-center justify-center gap-2 p-2 md:flex">
-      <div class="size-10 rounded-full bg-primary" />
+      <figure :class="isOpen ? 'size-14' : 'size-10'" class="rounded-full bg-primary">
+        <img src="/logo-2.jpeg" alt="logo" class="size-full rounded-full">
+      </figure>
       <span :class="isOpen ? 'flex' : 'hidden'" class="font-bold text-primary">CutePet</span>
     </section>
 

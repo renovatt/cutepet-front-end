@@ -2,6 +2,9 @@
 import { Dog } from 'lucide-vue-next'
 
 definePageMeta({ middleware: 'auth' })
+useHead({
+  title: 'Raças de cães'
+})
 
 const { dogs, el } = await useScroll()
 </script>

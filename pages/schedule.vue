@@ -2,6 +2,9 @@
 import { Plus } from 'lucide-vue-next'
 
 definePageMeta({ middleware: 'auth' })
+useHead({
+  title: 'Agendamentos'
+})
 
 const { isOpen } = useToggle()
 const { lastTwoCards } = useCardsData()

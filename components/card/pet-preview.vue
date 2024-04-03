@@ -8,7 +8,7 @@ const { schedule } = defineProps<{ schedule: Schedule }>()
 
 <template>
   <section class="relative flex w-full max-w-96 items-center justify-center rounded-lg border p-2 shadow">
-    <Download class="absolute right-3 top-3 size-5 cursor-pointer text-primary/70 transition-all hover:text-primary" />
+    <!-- <Download class="absolute right-3 top-3 size-5 cursor-pointer text-primary/70 transition-all hover:text-primary" /> -->
     <article class="flex w-full items-start justify-between gap-2 p-2">
       <figure class="size-24 md:size-40">
         <the-image-skeleton class="size-24 rounded-lg object-cover md:size-40" :src="schedule.breed.image.url"

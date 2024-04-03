@@ -2,6 +2,9 @@
 import { Cat } from 'lucide-vue-next'
 
 definePageMeta({ middleware: 'auth' })
+useHead({
+  title: 'Raças de gatos'
+})
 
 const { breeds: cats, error, pending } = useCatBreeds()
 

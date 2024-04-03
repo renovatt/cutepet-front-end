@@ -1,3 +1,24 @@
+<script setup lang="ts">
+useHead({
+  titleTemplate: '%s - CutePet',
+  title: 'Início',
+  meta: [
+    {
+      name: 'author',
+      content: '@renovatt',
+    },
+    {
+      name: 'keywords',
+      content: 'Petshop, Agendamento, Pet, CutePet',
+    }
+  ]
+})
+useSeoMeta({
+  ogImage: '/logo-2.jpeg',
+  description: 'Seu sistema de agendamentos para Petshop',
+})
+</script>
+
 <template>
   <NuxtLayout>
     <Toaster />
