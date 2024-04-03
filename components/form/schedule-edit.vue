@@ -20,7 +20,7 @@ const chosenPet = ref(schedule.pet)
 
 const { cats, dogs } = usePets()
 const { handleLimitSize } = useDogBreeds()
-const { update } = useSchedules()
+const { update, isLoading } = useSchedules()
 
 const searchBreed = (name: string) => {
   const breedExists = dogs.value.some(dog => dog.name === name)
@@ -283,7 +283,7 @@ const onSubmit = handleSubmit(async (values) => {
     </FormField>
 
     <Button type="submit" class="w-full">
-      Salvar
+      {{ isLoading ? 'Salvando...' : 'Salvar' }}
     </Button>
   </form>
 </template>

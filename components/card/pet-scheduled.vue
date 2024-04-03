@@ -8,7 +8,7 @@ const scheduleSelected = ref<Schedule>()
 const { schedule } = defineProps<{ schedule: Schedule }>()
 
 const { isOpen } = useToggle()
-const { schedules, patch } = useSchedules()
+const { schedules, patch, isLoadingFinish, isLoadingCancel } = useSchedules()
 
 const handleSelectSchedule = (id: string) => {
   const schedule = schedules.value?.find(schedule => schedule.id === id)
@@ -61,13 +61,13 @@ const handleChangeStatus = async (status: 'FINISHED' | 'CANCELED') => {
           <div class="flex flex-col gap-2">
             <Button class="w-full rounded-lg bg-primary py-2 text-white shadow-none"
               @click="handleChangeStatus('FINISHED')">
-              Finalizar
+              {{ isLoadingFinish || 'Finalizar' }}
             </Button>
 
             <Button
               class="w-full rounded-lg border border-primary bg-transparent py-2 text-primary shadow-none hover:bg-transparent hover:opacity-70"
               @click="handleChangeStatus('CANCELED')">
-              Cancelar
+              {{ isLoadingCancel || 'Cancelar' }}
             </Button>
           </div>
         </aside>

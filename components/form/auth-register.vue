@@ -6,13 +6,18 @@ import { registerFormSchema } from '~/schemas/register-form'
 const { handleSubmit } = useForm({
   validationSchema: registerFormSchema
 })
+
+const isLoading = ref(false)
+
 const { signup } = useAuth()
 
 const onSubmit = handleSubmit(async (values) => {
+  isLoading.value = true
   try {
     const res = await signup(values)
 
     if (res.type === 'success') {
+      isLoading.value = false
       toast({
         description: 'Bem vindo!',
         class: 'text-green-500',
@@ -22,12 +27,14 @@ const onSubmit = handleSubmit(async (values) => {
         useRouter().push('/dashboard')
       }, 500)
     } else if (res.type === 'error') {
+      isLoading.value = false
       toast({
         description: res.message,
         class: 'text-red-500',
       })
     }
   } catch (err) {
+    isLoading.value = false
     toast({
       description: 'Ocorreu um erro inesperado',
       class: 'text-red-500',
@@ -77,7 +84,7 @@ const onSubmit = handleSubmit(async (values) => {
       </FormField>
 
       <Button type="submit" class="w-full">
-        Cadastrar
+        {{ isLoading ? 'Cadastrando..' : 'Cadastrar' }}
       </Button>
     </div>
   </form>

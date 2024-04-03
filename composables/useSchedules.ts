@@ -2,6 +2,10 @@ import type { Schedule } from '~/utils/entities/schedule'
 import type { ScheduleResultAPI, FetchError } from '~/utils/entities/schedule-response-api'
 
 export const useSchedules = () => {
+  const isLoadingFinish = ref('')
+  const isLoadingCancel = ref('')
+  const isLoading = ref(false)
+
   const config = useRuntimeConfig()
   const { accessToken } = useToken()
 
@@ -37,6 +41,7 @@ export const useSchedules = () => {
   })
 
   const create = async (scheduleData: Schedule): Promise<ScheduleResultAPI> => {
+    isLoading.value = true
     try {
       const response: Schedule = await $fetch(`${config.public.baseUrl}/schedules`, {
         method: 'POST',
@@ -48,6 +53,7 @@ export const useSchedules = () => {
       })
 
       refresh()
+      isLoading.value = false
 
       return {
         type: 'success',
@@ -81,6 +87,7 @@ export const useSchedules = () => {
   }
 
   const update = async (scheduleData: Partial<Schedule>, scheduleId:string): Promise<ScheduleResultAPI> => {
+    isLoading.value = true
     try {
       const response: Schedule = await $fetch(`${config.public.baseUrl}/schedules/${scheduleId}`, {
         method: 'PUT',
@@ -92,12 +99,14 @@ export const useSchedules = () => {
       })
 
       refresh()
+      isLoading.value = false
 
       return {
         type: 'success',
         schedule: response,
       }
     } catch (error) {
+      isLoading.value = false
       const fetchError = error as FetchError
 
       if (fetchError.response?._data) {
@@ -125,6 +134,7 @@ export const useSchedules = () => {
   }
 
   const patch = async (scheduleData: Pick<Schedule, 'status'>, scheduleId:string): Promise<ScheduleResultAPI> => {
+    scheduleData.status === 'FINISHED' ? isLoadingFinish.value = 'Finalizando..' : isLoadingCancel.value = 'Cancelando..'
     try {
       const response: Schedule = await $fetch(`${config.public.baseUrl}/schedules/${scheduleId}`, {
         method: 'PATCH',
@@ -136,12 +146,14 @@ export const useSchedules = () => {
       })
 
       refresh()
+      isLoading.value = false
 
       return {
         type: 'success',
         schedule: response,
       }
     } catch (error) {
+      isLoading.value = false
       const fetchError = error as FetchError
 
       if (fetchError.response?._data) {
@@ -172,6 +184,9 @@ export const useSchedules = () => {
     create,
     update,
     patch,
+    isLoading,
+    isLoadingFinish,
+    isLoadingCancel,
     schedules,
     error,
     pending,
