@@ -29,7 +29,7 @@ const {
           </span>
 
           <span class="flex items-center justify-center gap-2 text-primary">
-            <span class="text-xs font-bold text-muted-foreground">Vida útil:</span>
+            <span class="text-xs font-bold text-muted-foreground">Est. de vida:</span>
             <span class="text-start text-xs font-semibold">{{ life_span }} anos</span>
           </span>
 

@@ -28,7 +28,7 @@ const lifeSpan = computed(() => life_span?.replace('years', 'anos') ?? '')
           </span>
 
           <span class="flex items-center justify-center gap-2 text-primary">
-            <span class="text-xs font-bold text-muted-foreground">Est. de Vida:</span>
+            <span class="text-xs font-bold text-muted-foreground">Est. de vida:</span>
             <span class="text-start text-xs font-semibold">{{ lifeSpan }}</span>
           </span>
 
